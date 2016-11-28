@@ -28,8 +28,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demospring" target="1.8" />
-      <module name="demoSpring" target="1.8" />
       <module name="project" target="1.8" />
     </bytecodeTargetLevel>
   </component>
