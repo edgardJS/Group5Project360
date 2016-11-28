@@ -16,27 +16,6 @@
 
     <!-- Custom CSS -->
     <link href="css/index.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="http://malsup.github.com/jquery.form.js"></script>
-
-    <script>
-        // wait for the DOM to be loaded
-        $(document).ready(function () {
-            // bind 'myForm' and provide a simple callback function
-            $('#myForm').ajaxForm(function () {
-                alert("Thank you for your comment!");
-            });
-        });
-    </script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 
@@ -54,8 +33,13 @@
         <div class="col-sm-8">
             <h1>Form</h1>
             <form action="#" th:action="@{/submitForm}" method="post">
-                <p>name: <input type="text" name="name"/></p>
                 <p>id: <input type="text" name="id"/></p>
+                <p>UW e-mail: <input type="text" name="uwEmail"/></p>
+                <p>External e-mail: <input type="text" name="email"/></p>
+                <p>GPA: <input type="text" name="gpa"/></p>
+                <p>TO DO PROPRERLY Degree: <input type="text" name="degrees"/></p>
+                <p>Transfer colleges: <input type="text" name="transferColleges"/></p>
+                <p>Employement: <input type="text" name="employments"/></p>
                 <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
             </form>
         </div>
@@ -63,4 +47,16 @@
 </div>
 
 </body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+<script src="js/add-student.js"></script>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 </html>

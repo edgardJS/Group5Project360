@@ -27,7 +27,7 @@ public class ProjectController {
     @GetMapping(value = "/addStudent")
     public String addStudent(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
         model.addAttribute("name", name);
-        return "addStudent";
+        return "add-student";
     }
 
     @PostMapping(value = "/addStudent")
@@ -45,12 +45,17 @@ public class ProjectController {
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
         studentDao.testGetItems();
-        return "updateStudent";
+        return "update-student";
     }
 
     @GetMapping(value = "/createReport")
     public String createReport() {
-        return "createReport";
+        return "create-report";
+    }
+
+    @GetMapping(value = "/viewStudents")
+    public String viewStudents() {
+        return "view-students";
     }
 
 }

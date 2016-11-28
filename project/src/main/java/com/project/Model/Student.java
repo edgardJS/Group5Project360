@@ -17,5 +17,5 @@ public class Student {
     Double gpa;
     List<Degree> degrees;
     HashMap<String, String> transferColleges;
-    List<Employement> employements;
+    List<Employement> employments;
 }
