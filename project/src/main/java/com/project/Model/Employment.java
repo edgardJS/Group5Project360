@@ -9,7 +9,7 @@ import java.util.List;
  * Created by edgards on 11/9/16.
  */
 @Data
-public class Employement {
+public class Employment {
     String companyName;
     List<String> skills;
     Date startDate;

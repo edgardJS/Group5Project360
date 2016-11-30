@@ -2,12 +2,17 @@ package com.project;
 
 import com.project.Model.Student;
 import com.project.dao.StudentDao;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Map;
 
 
 /**
@@ -31,15 +36,14 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/addStudent")
-    ResponseEntity<Student> add(@RequestParam (value = "name") String name, @RequestParam (value = "id") Integer id) {
-        //System.out.println(id);
-        Student student = new Student();
-        student.setId(id);
-        student.setName(name);
-        student.setUwEmail("test@uw.edu");
-        student.setGpa(4.0);
-
-        return new ResponseEntity<>(student, HttpStatus.OK);
+    public String addStudentPost(@Valid Student student, BindingResult result,
+                                 Model model) throws Exception {
+//        // if any errors, re-render the user info edit form
+        if (result.hasErrors()) {
+            return "fragments/user :: info-form";
+        }
+        // let the service layer handle the saving of the validated form fields
+        return "fragments/user :: info-success";
     }
 
     @GetMapping(value = "/updateStudent")
