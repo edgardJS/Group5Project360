@@ -2,15 +2,17 @@ package com.project;
 
 import com.project.Model.Student;
 import com.project.dao.StudentDao;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 
 /**
@@ -21,6 +23,9 @@ public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
+    StudentAddMutator studentAddMutator;
 
     @GetMapping(value = "/main")
     public String main() {
@@ -35,10 +40,10 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/addStudent")
-    public String addStudentPost(@Valid Student student, BindingResult result,
+    public String addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
                                  Model model) throws Exception {
+        // if any errors, re-render the user info edit form
         studentDao.testAddStudent();
-//        // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
             return "fragments/user :: info-form";
         }
