@@ -1,6 +1,8 @@
 package com.project;
 
+import com.project.Model.AddStudentForm;
 import com.project.Model.Student;
+import com.project.Mutator.StudentAddMutator;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,28 +24,29 @@ public class ProjectController {
     @Autowired
     StudentDao studentDao;
 
+    @Autowired
+    StudentAddMutator studentAddMutator;
+
     @GetMapping(value = "/main")
     public String main() {
         return "main";
     }
 
     @GetMapping(value = "/addStudent")
-    public String addStudent(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        studentDao.testAddStudent();
-        model.addAttribute("name", name);
+    public String addStudent() {
         return "add-student";
     }
 
     @PostMapping(value = "/addStudent")
-    public String addStudentPost(@Valid Student student, BindingResult result,
+    public String addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
                                  Model model) throws Exception {
-        studentDao.testAddStudent();
-//        // if any errors, re-render the user info edit form
+        // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
-            return "fragments/user :: info-form";
+            return "error";
+        } else {
+            studentAddMutator.parseData(addStudentForm);
+            return "success";
         }
-        // let the service layer handle the saving of the validated form fields
-        return "fragments/user :: info-success";
     }
 
     @GetMapping(value = "/updateStudent")

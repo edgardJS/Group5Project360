@@ -11,8 +11,8 @@ import java.util.List;
 @Data
 public class Employment {
     String companyName;
+    String position;
     List<String> skills;
     Date startDate;
     Date endDate;
-    String position;
 }
