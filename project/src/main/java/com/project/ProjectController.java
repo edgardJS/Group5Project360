@@ -2,17 +2,15 @@ package com.project;
 
 import com.project.Model.Student;
 import com.project.dao.StudentDao;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 
 /**
@@ -31,6 +29,7 @@ public class ProjectController {
 
     @GetMapping(value = "/addStudent")
     public String addStudent(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
+        studentDao.testAddStudent();
         model.addAttribute("name", name);
         return "add-student";
     }
@@ -38,6 +37,7 @@ public class ProjectController {
     @PostMapping(value = "/addStudent")
     public String addStudentPost(@Valid Student student, BindingResult result,
                                  Model model) throws Exception {
+        studentDao.testAddStudent();
 //        // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
             return "fragments/user :: info-form";
@@ -48,7 +48,8 @@ public class ProjectController {
 
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
-        studentDao.testGetItems();
+//        studentDao.testGetStudent();
+        studentDao.testUpdateStudent();
         return "update-student";
     }
 
@@ -59,6 +60,7 @@ public class ProjectController {
 
     @GetMapping(value = "/viewStudents")
     public String viewStudents() {
+        studentDao.testGetStudents();
         return "view-students";
     }
 

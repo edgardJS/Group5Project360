@@ -26,4 +26,8 @@ public class Student {
     List<Degree> degrees;
     List<String> transferColleges;
     List<Employment> employments;
+
+    public String toString() {
+        return String.format("%s %s %s %s %s", id, firstName, lastName, uwEmail, email);
+    }
 }
