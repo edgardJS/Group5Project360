@@ -1,16 +1,17 @@
 package com.project;
 
 import com.project.Model.AddStudentForm;
-import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
@@ -37,15 +38,16 @@ public class ProjectController {
         return "add-student";
     }
 
-    @PostMapping(value = "/addStudent")
-    public String addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
-                                 Model model) throws Exception {
+    @PostMapping(value = "/addStudentForm")
+    @ResponseBody
+    public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
+                                                 Model model) throws Exception {
         // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
-            return "error";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } else {
             studentAddMutator.parseData(addStudentForm);
-            return "success";
+            return ResponseEntity.ok("success");
         }
     }
 
