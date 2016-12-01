@@ -1,8 +1,10 @@
 package com.project.Model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
-import java.util.HashMap;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -10,12 +12,18 @@ import java.util.List;
  */
 @Data
 public class Student {
+    @NotNull
     Integer id;
-    String name;
+    @NotBlank
+    String firstName;
+    @NotBlank
+    String lastName;
+    @Email
     String uwEmail;
+    @Email
     String email;
     Double gpa;
     List<Degree> degrees;
-    HashMap<String, String> transferColleges;
-    List<Employement> employments;
+    List<String> transferColleges;
+    List<Employment> employments;
 }
