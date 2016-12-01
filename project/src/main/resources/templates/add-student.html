@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
 
@@ -82,7 +83,7 @@
 </nav>
 <div class="container">
 
-    <form class="well form-horizontal" action=" " method="post"  id="addStudentForm">
+    <form class="well form-horizontal" action="#" th:action="@{/submitForm}" method="post"  id="addStudentForm">
         <fieldset>
 
             <!-- Form Name -->
@@ -111,7 +112,6 @@
             </div>
 
             <!-- Text input-->
-
             <div class="form-group">
                 <label class="col-md-4 control-label" >Last Name</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -321,7 +321,7 @@
             </div>
 
             <!-- Success message -->
-            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.</div>
+            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Student Added</div>
 
             <!-- Button -->
             <div class="form-group">
