@@ -4,17 +4,15 @@ import com.project.Model.AddStudentForm;
 import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.StudentDao;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 
 /**
@@ -53,7 +51,8 @@ public class ProjectController {
 
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
-        studentDao.testGetItems();
+//        studentDao.testGetStudent();
+        studentDao.testUpdateStudent();
         return "update-student";
     }
 
