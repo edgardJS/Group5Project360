@@ -24,10 +24,12 @@
         <processorPath useClasspath="true" />
         <module name="demospring" />
         <module name="demoSpring" />
+        <module name="group5project" />
         <module name="project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="group5project" target="1.8" />
       <module name="project" target="1.8" />
     </bytecodeTargetLevel>
   </component>
