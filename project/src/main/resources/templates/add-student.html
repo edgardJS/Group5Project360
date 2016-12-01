@@ -34,12 +34,25 @@
             <h1>Form</h1>
             <form action="#" th:action="@{/submitForm}" method="post">
                 <p>id: <input type="text" name="id"/></p>
-                <p>UW e-mail: <input type="text" name="uwEmail"/></p>
-                <p>External e-mail: <input type="text" name="email"/></p>
+                <p>First name: <input type="text" name="firstName"/></p>
+                <p>Last name: <input type="text" name="lastName"/></p>
+                <p>UW e-mail: <input type="email" name="uwEmail"/></p>
+                <p>External e-mail: <input type="email" name="externalEmail"/></p>
                 <p>GPA: <input type="text" name="gpa"/></p>
-                <p>TO DO PROPRERLY Degree: <input type="text" name="degrees"/></p>
-                <p>Transfer colleges: <input type="text" name="transferColleges"/></p>
-                <p>Employement: <input type="text" name="employments"/></p>
+                <p>Degree: <input type="text" name="degreeLevel"/></p>
+                <p>Degree program: <input type="text" name="program"/></p>
+                <p>Graduation Term: <input type="text" name="graduationTerm"/></p>
+                <p>Graduation Year: <input type="text" name="graduationYear"/></p>
+                <p>Transfer college: <input type="text" name="transferSchools"/></p>
+                <p>Company name: <input type="text" name="companyName"/></p>
+                <p>position: <input type="text" name="position"/></p>
+                <p>Skills: <input type="text" name="skills"/></p>
+                <p>Skills: <input type="text" name="skills"/></p>
+                <p>Start date: <input type="date" name="startDate"/></p>
+                <p>End date: <input type="date" name="endDate"/></p>
+                <p>Salary: <input type="number" step="any" name="salary"/></p>
+                <p>Current job: <input type="checkbox" name="isCurrentJob"/></p>
+                <p>Will be hired: <input type="checkbox" name="willBeHired"/></p>
                 <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
             </form>
         </div>
