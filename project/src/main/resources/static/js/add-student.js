@@ -16,7 +16,7 @@ $(document).ready(function() {
                         message: 'Please supply your student ID'
                     }
                 }
-            }
+            },
             firstName: {
                 validators: {
                     stringLength: {
