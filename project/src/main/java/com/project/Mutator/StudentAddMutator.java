@@ -21,18 +21,16 @@ public class StudentAddMutator {
 
     public void parseData(AddStudentForm addStudentForm) {
         Student student = new Student();
-        student.setDegrees(createDegree(addStudentForm));
-        student.setEmployments(createEmployment(addStudentForm));
         student.setId(addStudentForm.getId());
         student.setLastName(addStudentForm.getLastName());
         student.setFirstName(addStudentForm.getFirstName());
         student.setUwEmail(addStudentForm.getUwEmail());
         student.setTransferColleges(addStudentForm.getTransferSchools());
-        if (addStudentForm.getEmail() != null) {
+        if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
 
-        // here we can call the studentDao.addStudent()
+        studentDao.testAddStudent(student);
     }
 
     private ArrayList<Employment> createEmployment(AddStudentForm addStudentForm) {
