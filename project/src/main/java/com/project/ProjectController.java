@@ -4,6 +4,9 @@ import com.project.Model.AddStudentForm;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
+import com.project.Model.AddStudentForm;
+import com.project.Model.Student;
+import com.project.Mutator.StudentAddMutator;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,11 +31,7 @@ public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
-
-    @Autowired
     DegreeDao degreeDao;
-
-    @Autowired
     EmploymentDao employmentDao;
 
     @Autowired
@@ -42,27 +41,21 @@ public class ProjectController {
     public String main() {
         return "main";
     }
-
-    @GetMapping(value = "/header")
-    public String header() {
-        return "header";
-    }
-
+    
     @GetMapping(value = "/addStudent")
     public String addStudent() {
         return "add-student";
     }
 
-    @PostMapping(value = "/addStudentForm")
-    @ResponseBody
-    public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
-                                                 Model model) throws Exception {
+    @PostMapping(value = "/addStudent")
+    public String addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
+                                 Model model) throws Exception {
         // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            return "error";
         } else {
             studentAddMutator.parseData(addStudentForm);
-            return ResponseEntity.ok("success");
+            return "success";
         }
     }
 
@@ -84,4 +77,5 @@ public class ProjectController {
         studentDao.getStudents();
         return "view-students";
     }
+
 }

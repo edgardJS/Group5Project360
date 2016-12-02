@@ -7,8 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * This class holds data on a students employment.
+ *
  * @author Edgard Solorzano
- * @author Adam Waldron
  * @author Brian Jorgenson
  */
 @Data
@@ -20,7 +21,7 @@ public class Employment {
     List<String> skills;
     Date startDate;
     Date endDate;
-
+    
     /**
      * Turns a list of skills into a string of skills.
      * In the format "skill1, skill2, etc".

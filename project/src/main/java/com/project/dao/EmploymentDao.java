@@ -16,25 +16,36 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Brian on 11/30/2016.
+ * This class holds database queries and actions for the employment class/table.
+ *
+ * @author Brian Jorgenson
  */
 @Repository
 public class EmploymentDao {
     
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
+    private JdbcTemplate jdbcTemplate;
+    
+    /**
+     * Adds an employment to the DB.
+     *
+     * @param emp the employment to add
+     */
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
             + "skills, startDate, endDate";
-        // Turns list of skills into string of skills "skill1, skill2, etc"
         Object[] parameters = {emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
                                 emp.skillsToString(), emp.getStartDate(), emp.getEndDate()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
                         Types.DATE, Types.DATE};
         jdbcTemplate.update(sql, parameters, types);
     }
-
+    
+    /**
+     * Updates a students employment.
+     *
+     * @param emp employment to update
+     */
     public void updateEmployment(Employment emp) {
         String sql = "update Employment set companyName = ?, `position` = ?, skills = ? "
                 + "startDate = ?, endDate = ? "
@@ -59,14 +70,19 @@ public class EmploymentDao {
     }
     
     
+    /**
+     * Gets all companies.
+     *
+     * @return list of all companies
+     */
     public List<String> getCompanys() {
-        String sql = "select * from Comany";
-        List<String> companys = new ArrayList<>();
+        String sql = "select * from Company";
+        List<String> companies = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row : rows) {
-            companys.add((String) row.get("companyName"));
+            companies.add((String) row.get("companyName"));
         }
-        return companys;
+        return companies;
     }
     
     /**
@@ -92,7 +108,9 @@ public class EmploymentDao {
 
 }
 
-
+/**
+ * Gets data from row of MySQL data and maps it to an Employment.
+ */
 class EmploymentRowMapper implements RowMapper {
     
     @Override
