@@ -82,13 +82,12 @@ public class DegreeDao {
     /**
      * Gets a specific degree by id from a student.
      *
-     * @param degree degree to get
+     * @param id degreeId to get
      * @return degree from DB
      */
-    public Degree getStudentDegree(Degree degree) {
-        String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
-        Object[] parameters = new Object[] {degree.getDegreeId(), degree.getStudentId()};
-        return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
+    public Degree getDegree(int id) {
+        String sql = "select * from StudentDegree where degreeId = ?";
+        return  (Degree) jdbcTemplate.queryForObject(sql, new Object[]{id}, new DegreeRowMapper());
 
     }
 }

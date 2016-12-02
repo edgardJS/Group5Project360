@@ -1,28 +1,38 @@
 package com.project;
 
 import com.project.Model.AddStudentForm;
+import com.project.Mutator.StudentAddMutator;
+import com.project.dao.DegreeDao;
+import com.project.dao.EmploymentDao;
+import com.project.Model.AddStudentForm;
 import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
 
 /**
- * Created by edgards on 10/29/16.
+ * @author Edgard Solorzano
+ * @author Adam Waldron
+ * @author Brian Jorgenson
  */
 @Controller
 public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
+    DegreeDao degreeDao;
+    EmploymentDao employmentDao;
 
     @Autowired
     StudentAddMutator studentAddMutator;
@@ -31,7 +41,7 @@ public class ProjectController {
     public String main() {
         return "main";
     }
-
+    
     @GetMapping(value = "/addStudent")
     public String addStudent() {
         return "add-student";
@@ -51,8 +61,9 @@ public class ProjectController {
 
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
-//        studentDao.testGetStudent();
-        studentDao.testUpdateStudent();
+//        studentDao.getStudent();
+//        studentDao.testUpdateStudent();
+        studentDao.getStudents();
         return "update-student";
     }
 
@@ -63,6 +74,7 @@ public class ProjectController {
 
     @GetMapping(value = "/viewStudents")
     public String viewStudents() {
+        studentDao.getStudents();
         return "view-students";
     }
 
