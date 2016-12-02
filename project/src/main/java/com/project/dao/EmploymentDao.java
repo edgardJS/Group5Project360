@@ -75,7 +75,7 @@ public class EmploymentDao {
      *
      * @return list of all companies
      */
-    public List<String> getCompanys() {
+    public List<String> getCompanies() {
         String sql = "select * from Company";
         List<String> companies = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);

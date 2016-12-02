@@ -97,7 +97,7 @@ public class DegreeDao {
     }
     
     /**
-     * Makes a list of degrees from sql query.
+     * Makes a list of degrees from an sql query.
      *
      * @param sql sql query
      * @return list of degrees
