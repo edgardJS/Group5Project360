@@ -15,6 +15,8 @@ import java.util.Map;
 
 
 /**
+ * This class hold database queries and actions for the student object/table.
+ *
  * @author Edgard Solorzano
  * @author Adam Waldron
  * @author Brian Jorgenson
@@ -24,7 +26,12 @@ public class StudentDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    
+    /**
+     * Adds a student.
+     *
+     * @param student student to add
+     */
     public void testAddStudent(Student student) {
         String sql = "insert into Student(studentId, lastName, firstName, uwEmail, externalEmail) "
                 + "values (?, ?, ?, ?, ?)";
@@ -33,7 +40,12 @@ public class StudentDao {
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
         jdbcTemplate.update(sql, parameters, types);
     }
-
+    
+    /**
+     * Updates a student.
+     *
+     * @param student student to update
+     */
     public void testUpdateStudent(Student student) {
         String sql = "update Student set uwEmail = ?, externalEmail = ?"
                     + "where studentId = ?";
@@ -41,12 +53,23 @@ public class StudentDao {
         int[] types = {Types.VARCHAR, Types.VARCHAR};
         jdbcTemplate.update(sql, parameters, types);
     }
-
+    
+    /**
+     * Gets a student by id.
+     *
+     * @param id id to get by
+     * @return the student
+     */
     public Student getStudent(int id) {
         String sql = "select * from Student where studentId = ?";
         return (Student) jdbcTemplate.queryForObject(sql, new Object[]{id}, new StudentRowMapper());
     }
-
+    
+    /**
+     * Gets all students
+     *
+     * @return list of students
+     */
     public List<Student> getStudents() {
         String sql = "select * from Student";
         List<Student> students = new ArrayList<>();
@@ -67,6 +90,9 @@ public class StudentDao {
     }
 }
 
+/**
+ * Gets data from row of MySQL data and maps it to a Student.
+ */
 class StudentRowMapper implements RowMapper {
 
     @Override

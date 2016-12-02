@@ -13,11 +13,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Brian on 11/30/2016.
+ * This class holds database queries and actions for the degree class/table.
+ *
+ * @author Brian Jorgenson
  */
 public class DegreeDao {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     
     /**
      * Adds a degree that is associated to a student by studentId.

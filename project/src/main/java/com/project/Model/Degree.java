@@ -5,7 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by edgards on 11/9/16.
+ * This class hold data on a degree that a student has completed.
+ *
+ * @author Edgard Solorzano
  */
 @Data
 public class Degree {
