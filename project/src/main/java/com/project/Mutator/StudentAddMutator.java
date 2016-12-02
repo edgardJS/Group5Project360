@@ -4,11 +4,16 @@ import com.project.Model.AddStudentForm;
 import com.project.Model.Degree;
 import com.project.Model.Employment;
 import com.project.Model.Student;
+import com.project.dao.DegreeDao;
+import com.project.dao.EmploymentDao;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +24,13 @@ public class StudentAddMutator {
     @Autowired
     StudentDao studentDao;
 
-    public void parseData(AddStudentForm addStudentForm) {
+    @Autowired
+    DegreeDao degreeDao;
+
+    @Autowired
+    EmploymentDao employmentDao;
+
+    public void parseData(AddStudentForm addStudentForm) throws ParseException {
         Student student = new Student();
         student.setId(addStudentForm.getId());
         student.setLastName(addStudentForm.getLastName());
@@ -29,17 +40,45 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-
         studentDao.testAddStudent(student);
+        if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
+            createDegree(addStudentForm);
+        }
+        if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
+            createEmployment(addStudentForm);
+        }
     }
 
-    private ArrayList<Employment> createEmployment(AddStudentForm addStudentForm) {
-        ArrayList<Employment> employment = new ArrayList<>();
-        return  employment;
-    }
-
-    private ArrayList<Degree> createDegree(AddStudentForm addStudentForm) {
-        ArrayList<Degree> degree = new ArrayList<>();
+    private Degree createDegree(AddStudentForm addStudentForm) {
+        Degree degree = new Degree();
+        degree.setStudentId(addStudentForm.getId());
+        degree.setDegreeLevel(addStudentForm.getDegreeLevel());
+        degree.setProgram(addStudentForm.getProgram());
+        degree.setGpa(addStudentForm.getGpa());
+        degree.setGraduationTerm(addStudentForm.getGraduationTerm());
+        degree.setGraduationYear(addStudentForm.getGraduationYear());
+        degreeDao.addStudentDegree(degree);
         return degree;
+    }
+
+    private Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
+        Employment employment = new Employment();
+        employment.setStudentId(addStudentForm.getId());
+        employment.setCompanyName(addStudentForm.getCompanyName());
+        employment.setPosition(addStudentForm.getPosition());
+        employment.setSkills(addStudentForm.getSkills());
+        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
+            Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getStartDate());
+            employment.setStartDate(startDate);
+        }
+        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
+            Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getEndDate());
+            employment.setStartDate(endDate);
+        }
+        employment.setIsCurrentJob(addStudentForm.getIsCurrentJob());
+        employment.setInternship(addStudentForm.getIsInternship());
+        employment.setWillBeHired(addStudentForm.getWillBeHired());
+        employmentDao.addEmployment(employment);
+        return  employment;
     }
 }

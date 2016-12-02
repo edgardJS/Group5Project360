@@ -20,6 +20,10 @@ public class Employment {
     List<String> skills;
     Date startDate;
     Date endDate;
+    Double salary;
+    Boolean isCurrentJob;
+    Boolean internship;
+    Boolean willBeHired;
 
     /**
      * Turns a list of skills into a string of skills.
