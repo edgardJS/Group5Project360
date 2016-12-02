@@ -21,7 +21,12 @@ public class EmploymentDao {
     
     @Autowired
     JdbcTemplate jdbcTemplate;
-
+    
+    /**
+     * Adds an employment to the DB.
+     *
+     * @param emp the employment to add
+     */
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
             + "skills, startDate, endDate";
@@ -32,7 +37,12 @@ public class EmploymentDao {
                         Types.DATE, Types.DATE};
         jdbcTemplate.update(sql, parameters, types);
     }
-
+    
+    /**
+     * Updates a students employment.
+     *
+     * @param emp employment to update
+     */
     public void updateEmployment(Employment emp) {
         String sql = "update Employment set companyName = ?, `position` = ?, skills = ? "
                 + "startDate = ?, endDate = ? "
@@ -57,14 +67,19 @@ public class EmploymentDao {
     }
     
     
+    /**
+     * Gets all companies.
+     *
+     * @return list of all companies
+     */
     public List<String> getCompanys() {
         String sql = "select * from Company";
-        List<String> companys = new ArrayList<>();
+        List<String> companies = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row : rows) {
-            companys.add((String) row.get("companyName"));
+            companies.add((String) row.get("companyName"));
         }
-        return companys;
+        return companies;
     }
     
     /**
