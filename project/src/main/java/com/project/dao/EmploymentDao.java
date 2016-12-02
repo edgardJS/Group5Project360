@@ -33,11 +33,15 @@ public class EmploymentDao {
      */
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
-            + "skills, startDate, endDate";
+                + "skills, startDate, endDate, salary, currentJob, internship, willBehired";
+
+        // Turns list of skills into string of skills "skill1, skill2, etc"
         Object[] parameters = {emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
-                                emp.skillsToString(), emp.getStartDate(), emp.getEndDate()};
+                emp.skillsToString(), new java.sql.Date(emp.getStartDate().getTime()),
+                new java.sql.Date(emp.getEndDate().getTime()), emp.getSalary(),
+                emp.getIsCurrentJob(), emp.getInternship(), emp.getWillBeHired()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
-                        Types.DATE, Types.DATE};
+                Types.DATE, Types.DATE, Types.DOUBLE, Types.BIT, Types.BIT, Types.BIT};
         jdbcTemplate.update(sql, parameters, types);
     }
     
@@ -101,7 +105,7 @@ public class EmploymentDao {
             employment.setEmploymentId((Integer) row.get("employmentId"));
             employment.setPosition((String) row.get("position"));
             employment.setSkills(
-                    new ArrayList<String>(Arrays.asList(((String)row.get("skills")).split(", "))));
+                    new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
         }
         return employments;
     }
@@ -121,7 +125,7 @@ class EmploymentRowMapper implements RowMapper {
         employment.setCompanyName(rs.getString("companyName"));
         employment.setPosition(rs.getString("position"));
         employment.setSkills(new ArrayList<String>(Arrays.asList((
-                        (String)rs.getString("skills")).split(", "))));
+                (String) rs.getString("skills")).split(", "))));
         employment.setStartDate(rs.getDate("startDate"));
         employment.setEndDate(rs.getDate("endDate"));
         return employment;
