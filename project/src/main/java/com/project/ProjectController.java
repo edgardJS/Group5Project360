@@ -1,28 +1,35 @@
 package com.project;
 
-import com.project.Model.Student;
+import com.project.Model.AddStudentForm;
+import com.project.Mutator.StudentAddMutator;
+import com.project.dao.DegreeDao;
+import com.project.dao.EmploymentDao;
 import com.project.dao.StudentDao;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 
 /**
- * Created by edgards on 10/29/16.
+ * @author Edgard Solorzano
+ * @author Adam Waldron
+ * @author Brian Jorgenson
  */
 @Controller
 public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
+    DegreeDao degreeDao;
+    EmploymentDao employmentDao;
 
     @Autowired
     StudentAddMutator studentAddMutator;
@@ -31,30 +38,30 @@ public class ProjectController {
     public String main() {
         return "main";
     }
-
+    
     @GetMapping(value = "/addStudent")
-    public String addStudent(@RequestParam(value = "name", required = false, defaultValue = "World") String name, Model model) {
-        studentDao.testAddStudent();
-        model.addAttribute("name", name);
+    public String addStudent() {
         return "add-student";
     }
-
-    @PostMapping(value = "/addStudent")
-    public String addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
-                                 Model model) throws Exception {
+    
+    @PostMapping(value = "/addStudentForm")
+    @ResponseBody
+    public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
+                                                 Model model) throws Exception {
         // if any errors, re-render the user info edit form
-        studentDao.testAddStudent();
         if (result.hasErrors()) {
-            return "fragments/user :: info-form";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } else {
+            studentAddMutator.parseData(addStudentForm);
+            return ResponseEntity.ok("success");
         }
-        // let the service layer handle the saving of the validated form fields
-        return "fragments/user :: info-success";
     }
 
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
-//        studentDao.testGetStudent();
-        studentDao.testUpdateStudent();
+//        studentDao.getStudent();
+//        studentDao.testUpdateStudent();
+        studentDao.getStudents();
         return "update-student";
     }
 
@@ -65,7 +72,7 @@ public class ProjectController {
 
     @GetMapping(value = "/viewStudents")
     public String viewStudents() {
-        studentDao.testGetStudents();
+        studentDao.getStudents();
         return "view-students";
     }
 
