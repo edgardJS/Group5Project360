@@ -49,14 +49,12 @@
 
 <div class="container">
 
-    <form class="well form-horizontal" action="/addStudentForm" method="post"  id="addStudentForm">
+    <form class="well form-horizontal col-md-12" action="/addStudentForm" method="post"  id="addStudentForm">
         <fieldset>
 
             <!-- Form Name -->
-            <legend>Add a Student</legend>
-            <div class="col-md-6">
-
-            <div class="form-group">
+            <legend class="col-md-12">Add a Student</legend>
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Student ID</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -68,7 +66,7 @@
 
             <!-- Text input-->
 
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">First Name</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -79,7 +77,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label" >Last Name</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -90,7 +88,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">UW E-Mail</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -101,7 +99,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">External E-Mail</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -111,7 +109,7 @@
                 </div>
             </div>
             <!-- Text input -->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Degree Level</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -122,7 +120,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Degree Program</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -132,30 +130,53 @@
                 </div>
             </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-6 control-label">Graduation Term</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="graduationTerm" placeholder="Spring" class="form-control" type="text">
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Graduation Term</label>
+                    <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <select name="graduationTerm" class="form-control selectpicker" >
+                                <option value=" ">Select graduation term</option>
+                                <option>Fall</option>
+                                <option>Winter</option>
+                                <option >Spring</option>
+                                <option >Summer</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group">
-                <label class="col-md-6 control-label">Graduation Year</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="graduationYear" placeholder="2017" class="form-control" type="text">
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Graduation Year</label>
+                    <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <select name="graduationYear" class="form-control selectpicker" >
+                                <option value=" " >Select graduation year</option>
+                                <option>2001</option>
+                                <option>2002</option>
+                                <option >2003</option>
+                                <option >2004</option>
+                                <option >2005</option>
+                                <option >2006</option>
+                                <option >2007</option>
+                                <option >2008</option>
+                                <option >2009</option>
+                                <option> 2010</option>
+                                <option >2011</option>
+                                <option >2012</option>
+                                <option >2013</option>
+                                <option >2014</option>
+                                <option >2015</option>
+                                <option >2016</option>
+                                <option> 2017</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Transfer Schools</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -166,7 +187,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">GPA</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -175,11 +196,9 @@
                     </div>
                 </div>
             </div>
-            </div>
 
-            <div class="col-md-6">
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Company Name</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -190,7 +209,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Position</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -201,7 +220,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Skills</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -212,7 +231,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Skills</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -223,7 +242,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Start Date</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -234,7 +253,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">End Date</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -245,7 +264,7 @@
             </div>
 
             <!-- Text input-->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Salary</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
@@ -254,10 +273,9 @@
                     </div>
                 </div>
             </div>
-            </div>
 
             <!-- radio checks -->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Current Job?</label>
                 <div class="col-md-6">
                     <div class="radio">
@@ -274,7 +292,7 @@
             </div>
 
             <!-- radio checks -->
-            <div class="form-group">
+            <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Will be Hired?</label>
                 <div class="col-md-6">
                     <div class="radio">
