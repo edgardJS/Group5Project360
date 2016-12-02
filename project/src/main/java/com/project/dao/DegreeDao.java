@@ -1,9 +1,11 @@
 package com.project.dao;
 
 import com.project.Model.Degree;
+import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +21,7 @@ import java.util.Map;
  */
 @Repository
 public class DegreeDao {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
     
@@ -115,14 +118,20 @@ public class DegreeDao {
     /**
      * Gets a specific degree by id from a student.
      *
-     * @param degree degree to get
+     * @param degreeId degree id to get
+     * @param studentId student to get from
      * @return degree from DB
      */
-    public Degree getStudentDegree(Degree degree) {
+    public Degree getStudentDegree(int degreeId, int studentId) {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
-        Object[] parameters = new Object[] {degree.getDegreeId(), degree.getStudentId()};
+        Object[] parameters = new Object[] {degreeId, studentId};
         return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
 
+    }
+
+    public List<String> getTransferColleges() {
+        String query = "select * from TransferCollege";
+        return (List<String>) jdbcTemplate.queryForList(query, String.class);
     }
 }
 

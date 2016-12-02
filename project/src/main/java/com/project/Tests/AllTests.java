@@ -9,6 +9,6 @@ import org.junit.runners.Suite;
  * @author Brian Jorgenson
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({})
+@Suite.SuiteClasses({DegreeDaoTest.class })
 public class AllTests {
 }

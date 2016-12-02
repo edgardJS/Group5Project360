@@ -6,6 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
+import static org.junit.Assert.*;
+
 /**
  * Created by Brian on 12/1/2016.
  */
@@ -24,26 +30,33 @@ public class DegreeDaoTest {
         degree.setProgram("program");
         degree.setGraduationTerm("Fall");
         degree.setGraduationYear(2011);
+        degree.setGpa(4.0);
     }
     
     @Test
     public void addStudentDegree() throws Exception {
-        
+        try {
+            Dao.addStudentDegree(degree);
+        } catch (Exception e) {
+            fail("Failure to add to StudentDegree table");
+        }
     }
     
     @Test
     public void getStudentDegrees() throws Exception {
-        
+        assertNotNull("StudentDegrees returned null",
+                        Dao.getStudentDegrees(12345));
     }
     
     @Test
     public void getDegrees() throws Exception {
-        
+        assertNotNull("Degrees returned null",
+                        Dao.getDegrees());
     }
     
     @Test
     public void getStudentDegree() throws Exception {
-        
+        assertSame(degree, Dao.getStudentDegree(degree.getDegreeId(), 12345));
     }
     
 }
