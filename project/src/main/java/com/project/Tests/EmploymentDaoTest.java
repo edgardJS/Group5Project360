@@ -3,6 +3,8 @@ package com.project.Tests;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
+
 /**
  * Created by Brian on 12/1/2016.
  */

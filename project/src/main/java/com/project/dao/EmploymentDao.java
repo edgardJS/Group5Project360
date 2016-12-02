@@ -69,8 +69,8 @@ public class EmploymentDao {
      * @return the employment
      */
     public Employment getEmployment(int id) {
-        String sql = "select * from Employment where employmentId = ?";
-        return (Employment) jdbcTemplate.queryForObject(sql, new Object[]{id}, new EmploymentRowMapper());
+        String sql = "select * from Employment where employmentId = " + id;
+        return (Employment) jdbcTemplate.queryForObject(sql, new EmploymentRowMapper());
     }
     
     
@@ -122,7 +122,7 @@ class EmploymentRowMapper implements RowMapper {
         Employment employment = new Employment();
         employment.setStudentId(rs.getInt("studentId"));
         employment.setEmploymentId(rs.getInt("employmentId"));
-        employment.setCompanyName(rs.getString("companyName"));
+        employment.setCompanyName(rs.getString("company"));
         employment.setPosition(rs.getString("position"));
         employment.setSkills(new ArrayList<String>(Arrays.asList((
                 (String) rs.getString("skills")).split(", "))));
