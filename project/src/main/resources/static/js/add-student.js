@@ -10,7 +10,7 @@ $(document).ready(function () {
             id: {
                 validators: {
                     stringLength: {
-                        min: 6,
+                        min: 7,
                     },
                     notEmpty: {
                         message: 'Please supply your student ID'
@@ -62,26 +62,25 @@ $(document).ready(function () {
                     stringLength: {
                         min: 3,
                     },
+                    notEmpty: {
+                        message: 'Please supply your GPA'
+                    },
                     double: {
                         message: 'Please supply a valid GPA'
                     }
                 }
             },
+            //Add Drop Downs
             degreeLevel: {
                 validators: {
-                    stringLength: {
-                        min: 2,
-                    },
                     notEmpty: {
                         message: 'Please supply your degree level'
                     }
                 }
             },
+            //Add Drop Downs
             program: {
                 validators: {
-                    stringLength: {
-                        min: 2,
-                    },
                     notEmpty: {
                         message: 'Please supply your degree program'
                     }
@@ -89,9 +88,6 @@ $(document).ready(function () {
             },
             graduationTerm: {
                 validators: {
-                    stringLength: {
-                        min: 4,
-                    },
                     notEmpty: {
                         message: 'Please supply your graduation term'
                     }
@@ -99,9 +95,6 @@ $(document).ready(function () {
             },
             graduationYear: {
                 validators: {
-                    stringLength: {
-                        min: 4,
-                    },
                     notEmpty: {
                         message: 'Please supply your graduation year'
                     }

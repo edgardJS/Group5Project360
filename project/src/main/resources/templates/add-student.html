@@ -90,24 +90,33 @@
                     </div>
                 </div>
             </div>
-            <!-- Text input -->
+
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Degree Level</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="degreeLevel" placeholder="Masters" class="form-control" type="text">
+                        <select name="degreeLevel" class="form-control selectpicker">
+                            <option value=" ">Select transfer school</option>
+                            {{#degreeLevel}}
+                            <option value="{{.}}">{{.}}</option>
+                            {{/degreeLevel}}
+                        </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Text input-->
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Degree Program</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="program" placeholder="Computer Science" class="form-control" type="text">
+                        <select name="program" class="form-control selectpicker">
+                            <option value=" ">Select transfer school</option>
+                            {{#program}}
+                            <option value="{{.}}">{{.}}</option>
+                            {{/program}}
+                        </select>
                     </div>
                 </div>
             </div>
