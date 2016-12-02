@@ -43,6 +43,11 @@ public class ProjectController {
         return "main";
     }
 
+    @GetMapping(value = "/header")
+    public String header() {
+        return "header";
+    }
+
     @GetMapping(value = "/addStudent")
     public String addStudent() {
         return "add-student";
