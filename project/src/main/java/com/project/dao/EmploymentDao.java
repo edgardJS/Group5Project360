@@ -32,7 +32,6 @@ public class EmploymentDao {
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
             + "skills, startDate, endDate";
-        // Turns list of skills into string of skills "skill1, skill2, etc"
         Object[] parameters = {emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
                                 emp.skillsToString(), emp.getStartDate(), emp.getEndDate()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
