@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by edgards on 11/30/16.
