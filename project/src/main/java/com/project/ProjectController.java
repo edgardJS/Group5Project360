@@ -1,6 +1,7 @@
 package com.project;
 
 import com.project.Model.AddStudentForm;
+import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
@@ -10,12 +11,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -49,8 +56,11 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/addStudent")
-    public String addStudent() {
-        return "add-student";
+    public ModelAndView addStudent() {
+        ModelMap modelMap = new ModelMap();
+        List<String> degrees = degreeDao.getTransferColleges();
+        modelMap.addAttribute("transferColleges", degrees);
+        return new ModelAndView("add-student", modelMap);
     }
 
     @PostMapping(value = "/addStudentForm")
@@ -64,6 +74,16 @@ public class ProjectController {
             studentAddMutator.parseData(addStudentForm);
             return ResponseEntity.ok("success");
         }
+    }
+
+    @PostMapping(value = "/searchStudent")
+    @ResponseBody
+    public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
+        Integer id = Integer.valueOf(studentId);
+        Student student = studentDao.getStudent(id);
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("student", student);
+        return new ModelAndView("updateStudent", modelMap);
     }
 
     @GetMapping(value = "/updateStudent")

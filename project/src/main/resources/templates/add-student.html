@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <html>
 <head>
 
@@ -21,26 +21,8 @@
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="https:////cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
 
-    <!-- JQuery CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-
     <!-- Custom CSS -->
     <link href="css/index.css" rel="stylesheet">
-
-    <!-- Bootstrap Validator -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -49,7 +31,7 @@
 
 <div class="container">
 
-    <form class="well form-horizontal col-md-12" action="/addStudentForm" method="post"  id="addStudentForm">
+    <form class="well form-horizontal col-md-12" action="/addStudentForm" method="post" id="addStudentForm">
         <fieldset>
 
             <!-- Form Name -->
@@ -71,18 +53,18 @@
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="firstName" placeholder="First Name" class="form-control"  type="text">
+                        <input name="firstName" placeholder="First Name" class="form-control" type="text">
                     </div>
                 </div>
             </div>
 
             <!-- Text input-->
             <div class="form-group col-md-6">
-                <label class="col-md-6 control-label" >Last Name</label>
+                <label class="col-md-6 control-label">Last Name</label>
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input name="lastName" placeholder="Last Name" class="form-control"  type="text">
+                        <input name="lastName" placeholder="Last Name" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -93,7 +75,7 @@
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="uwEmail" placeholder="uwnetID@uw.edu" class="form-control"  type="text">
+                        <input name="uwEmail" placeholder="uwnetID@uw.edu" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -104,7 +86,7 @@
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                        <input name="email" placeholder="myname@gmail.com" class="form-control"  type="text">
+                        <input name="email" placeholder="myname@gmail.com" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -130,50 +112,50 @@
                 </div>
             </div>
 
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Graduation Term</label>
-                    <div class="col-md-6 selectContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <select name="graduationTerm" class="form-control selectpicker" >
-                                <option value=" ">Select graduation term</option>
-                                <option>Fall</option>
-                                <option>Winter</option>
-                                <option >Spring</option>
-                                <option >Summer</option>
-                            </select>
-                        </div>
+            <div class="form-group col-md-6">
+                <label class="col-md-6 control-label">Graduation Term</label>
+                <div class="col-md-6 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <select name="graduationTerm" class="form-control selectpicker">
+                            <option value=" ">Select graduation term</option>
+                            <option>Fall</option>
+                            <option>Winter</option>
+                            <option>Spring</option>
+                            <option>Summer</option>
+                        </select>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Graduation Year</label>
-                    <div class="col-md-6 selectContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <select name="graduationYear" class="form-control selectpicker" >
-                                <option value=" " >Select graduation year</option>
-                                <option>2001</option>
-                                <option>2002</option>
-                                <option >2003</option>
-                                <option >2004</option>
-                                <option >2005</option>
-                                <option >2006</option>
-                                <option >2007</option>
-                                <option >2008</option>
-                                <option >2009</option>
-                                <option> 2010</option>
-                                <option >2011</option>
-                                <option >2012</option>
-                                <option >2013</option>
-                                <option >2014</option>
-                                <option >2015</option>
-                                <option >2016</option>
-                                <option> 2017</option>
-                            </select>
-                        </div>
+            <div class="form-group col-md-6">
+                <label class="col-md-6 control-label">Graduation Year</label>
+                <div class="col-md-6 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        <select name="graduationYear" class="form-control selectpicker">
+                            <option value=" ">Select graduation year</option>
+                            <option>2001</option>
+                            <option>2002</option>
+                            <option>2003</option>
+                            <option>2004</option>
+                            <option>2005</option>
+                            <option>2006</option>
+                            <option>2007</option>
+                            <option>2008</option>
+                            <option>2009</option>
+                            <option> 2010</option>
+                            <option>2011</option>
+                            <option>2012</option>
+                            <option>2013</option>
+                            <option>2014</option>
+                            <option>2015</option>
+                            <option>2016</option>
+                            <option> 2017</option>
+                        </select>
                     </div>
                 </div>
+            </div>
 
             <!-- Text input-->
             <div class="form-group col-md-6">
@@ -181,7 +163,12 @@
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="transferSchools" placeholder="Tacoma Community College" class="form-control" type="text">
+                        <select name="transferSchools" class="form-control selectpicker">
+                            <option value=" ">Select transfer school</option>
+                            {{#transferColleges}}
+                            <option value="{{.}}">{{.}}</option>
+                            {{/transferColleges}}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -280,12 +267,12 @@
                 <div class="col-md-6">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="currentJob" value="yes" /> Yes
+                            <input type="radio" name="currentJob" value="yes"/> Yes
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="currentJob" value="no" /> No
+                            <input type="radio" name="currentJob" value="no"/> No
                         </label>
                     </div>
                 </div>
@@ -297,25 +284,28 @@
                 <div class="col-md-6">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="willBeHired" value="yes" /> Yes
+                            <input type="radio" name="willBeHired" value="yes"/> Yes
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="willBeHired" value="no" /> No
+                            <input type="radio" name="willBeHired" value="no"/> No
                         </label>
                     </div>
                 </div>
             </div>
 
             <!-- Success message -->
-            <div class="alert alert-success" role="alert" id="success_message">Success <i class="glyphicon glyphicon-thumbs-up"></i> Student Added</div>
+            <div class="alert alert-success" role="alert" id="success_message">Success <i
+                    class="glyphicon glyphicon-thumbs-up"></i> Student Added
+            </div>
 
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-6 control-label"></label>
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-warning" >Send <span class="glyphicon glyphicon-send"></span></button>
+                    <button type="submit" class="btn btn-warning">Send <span class="glyphicon glyphicon-send"></span>
+                    </button>
                 </div>
             </div>
 
@@ -324,8 +314,28 @@
 </div>
 </div><!-- /.container -->
 
-</body>
+<!-- JQuery CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- HandleBars -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.amd.js"></script>
+
+<!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+<!-- Bootstrap Validator -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 <!-- Form Validation JS -->
 <script src="js/add-student.js"></script>
+</body>
 </html>

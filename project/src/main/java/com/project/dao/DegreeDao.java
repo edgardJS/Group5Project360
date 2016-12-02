@@ -90,6 +90,11 @@ public class DegreeDao {
         return  (Degree) jdbcTemplate.queryForObject(sql, new Object[]{id}, new DegreeRowMapper());
 
     }
+
+    public List<String> getTransferColleges() {
+        String query = "select * from TransferCollege";
+        return (List<String>) jdbcTemplate.queryForList(query, String.class);
+    }
 }
 
 /**
