@@ -7,8 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * This class holds data on a students employment.
+ *
  * @author Edgard Solorzano
- * @author Adam Waldron
  * @author Brian Jorgenson
  */
 @Data

@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Brian on 11/30/2016.
+ * This class holds database queries and actions for the employment class/table.
+ *
+ * @author Brian Jorgenson
  */
 public class EmploymentDao {
     
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     
     /**
      * Adds an employment to the DB.
@@ -105,7 +107,9 @@ public class EmploymentDao {
 
 }
 
-
+/**
+ * Gets data from row of MySQL data and maps it to an Employment.
+ */
 class EmploymentRowMapper implements RowMapper {
     
     @Override
