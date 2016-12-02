@@ -2,6 +2,8 @@ package com.project;
 
 import com.project.Model.AddStudentForm;
 import com.project.Mutator.StudentAddMutator;
+import com.project.dao.DegreeDao;
+import com.project.dao.EmploymentDao;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,11 @@ public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
+
+    @Autowired
     DegreeDao degreeDao;
+
+    @Autowired
     EmploymentDao employmentDao;
 
     @Autowired
@@ -73,5 +79,4 @@ public class ProjectController {
         studentDao.getStudents();
         return "view-students";
     }
-
 }

@@ -10,6 +10,8 @@ import java.util.List;
  */
 @Data
 public class Degree {
+    Integer studentId;
+    Integer degreeId;
     String degreeLevel;
     String program;
     String graduationTerm;

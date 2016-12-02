@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $(function(){
+        $("#header").load("header.html");
+    });
+
     $('#addStudentForm').bootstrapValidator({
         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
         feedbackIcons: {

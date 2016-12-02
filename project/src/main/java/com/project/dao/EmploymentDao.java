@@ -5,6 +5,7 @@ import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.util.Map;
 /**
  * Created by Brian on 11/30/2016.
  */
+@Repository
 public class EmploymentDao {
     
     @Autowired
