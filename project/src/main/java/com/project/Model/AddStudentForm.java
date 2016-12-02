@@ -40,5 +40,6 @@ public class AddStudentForm {
     String endDate; //converted to date
     Double salary;
     Boolean isCurrentJob;
+    Boolean isInternship;
     Boolean willBeHired;
 }
