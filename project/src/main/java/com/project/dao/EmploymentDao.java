@@ -63,7 +63,7 @@ public class EmploymentDao {
 
 
     public List<String> getCompanys() {
-        String sql = "select * from Comany";
+        String sql = "select * from Company";
         List<String> companys = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row : rows) {
