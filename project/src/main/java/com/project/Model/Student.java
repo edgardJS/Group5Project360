@@ -26,7 +26,6 @@ public class Student {
     String uwEmail;
     @Email
     String email;
-    Double gpa;
     ArrayList<Degree> degrees;
     ArrayList<String> transferColleges;
     ArrayList<Employment> employments;
