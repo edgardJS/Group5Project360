@@ -67,16 +67,14 @@ public class DegreeDao {
      *
      * @return list of degrees
      */
-    public List<Degree> getDegrees() {
-        String sql = "select * from Degree";
-        List<Degree> degrees = new ArrayList<>();
-        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row: rows) {
-            Degree degree = new Degree();
-            degree.setProgram((String) row.get("program"));
-            degree.setDegreeLevel((String)row.get("degree"));
-        }
-        return degrees;
+    public List<String> getDegrees() {
+        String sql = "select degree from Degree";
+        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    public List<String> getDegreeLevels() {
+        String sql = "select program from Degree";
+        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
     
     /**
