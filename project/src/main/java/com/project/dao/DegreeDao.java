@@ -70,6 +70,38 @@ public class DegreeDao {
      */
     public List<Degree> getDegrees() {
         String sql = "select * from Degree";
+        return makeListDegree(sql);
+    }
+    
+    /**
+     * Gets a list of degrees by level.
+     *
+     * @param level level to get by
+     * @return list of degrees
+     */
+    public List<Degree> getDegreeByLevel(Degree level) {
+        String sql = "select * from Degree where degree = " + level.getDegreeLevel();
+        return makeListDegree(sql);
+    }
+    
+    /**
+     * Gets a list of degrees by program.
+     *
+     * @param program program to get by
+     * @return list of degrees
+     */
+    public List<Degree> getDegreeByProgram(Degree program) {
+        String sql = "select * from Degree where program = " + program.getProgram();
+        return makeListDegree(sql);
+    }
+    
+    /**
+     * Makes a list of degrees from sql query.
+     *
+     * @param sql sql query
+     * @return list of degrees
+     */
+    private List<Degree> makeListDegree(String sql) {
         List<Degree> degrees = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row: rows) {

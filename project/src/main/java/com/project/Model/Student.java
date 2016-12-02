@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class holds data on a student.
@@ -28,9 +28,9 @@ public class Student {
     @Email
     String email;
     Double gpa;
-    List<Degree> degrees;
-    List<String> transferColleges;
-    List<Employment> employments;
+    ArrayList<Degree> degrees;
+    ArrayList<String> transferColleges;
+    ArrayList<Employment> employments;
 
     public String toString() {
         return String.format("%s %s %s %s %s", id, firstName, lastName, uwEmail, email);
