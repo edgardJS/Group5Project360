@@ -3,6 +3,7 @@ package com.project.Model;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * Created by edgards on 11/9/16.
