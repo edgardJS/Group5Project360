@@ -3,7 +3,6 @@ package com.project.Model;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * This class hold data on a degree that a student has completed.
@@ -12,8 +11,8 @@ import java.util.List;
  */
 @Data
 public class Degree {
-    Integer studentId;
-    Integer degreeId;
+    int degreeId;
+    int studentId;
     String degreeLevel;
     String program;
     String graduationTerm;

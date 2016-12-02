@@ -33,13 +33,15 @@ public class EmploymentDao {
      */
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
-                + "skills, startDate, endDate, salary, currentJob, internship, willBehired";
-
-        // Turns list of skills into string of skills "skill1, skill2, etc"
+                    + "skills, startDate, endDate, salary, currentJob, "
+                    + "internship, willBehired) "
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] parameters = {emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
-                emp.skillsToString(), new java.sql.Date(emp.getStartDate().getTime()),
-                new java.sql.Date(emp.getEndDate().getTime()), emp.getSalary(),
-                emp.getIsCurrentJob(), emp.getInternship(), emp.getWillBeHired()};
+                            emp.skillsToString(),
+                            new java.sql.Date(emp.getStartDate().getTime()),
+                            new java.sql.Date(emp.getEndDate().getTime()),
+                            emp.getSalary(), emp.getIsCurrentJob(), emp.getInternship(),
+                            emp.getWillBeHired()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
                 Types.DATE, Types.DATE, Types.DOUBLE, Types.BIT, Types.BIT, Types.BIT};
         jdbcTemplate.update(sql, parameters, types);
