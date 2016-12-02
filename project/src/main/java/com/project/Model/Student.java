@@ -1,15 +1,17 @@
 package com.project.Model;
 
+import com.sun.deploy.util.StringUtils;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by edgards on 11/9/16.
+ * @author Edgard Solorzano
+ * @author Adam Waldron
+ * @author Brian Jorgenson
  */
 @Data
 public class Student {
@@ -30,5 +32,17 @@ public class Student {
 
     public String toString() {
         return String.format("%s %s %s %s %s", id, firstName, lastName, uwEmail, email);
+    }
+    
+    public String degreesToString() {
+        return StringUtils.join(degrees, ", ");
+    }
+    
+    public String transferCollegesToString() {
+        return StringUtils.join(transferColleges, ", ");
+    }
+    
+    public String employmentsToString() {
+        return StringUtils.join(employments, ", ");
     }
 }
