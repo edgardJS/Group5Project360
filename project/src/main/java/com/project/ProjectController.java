@@ -17,13 +17,17 @@ import javax.validation.Valid;
 
 
 /**
- * Created by edgards on 10/29/16.
+ * @author Edgard Solorzano
+ * @author Adam Waldron
+ * @author Brian Jorgenson
  */
 @Controller
 public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
+    DegreeDao degreeDao;
+    EmploymentDao employmentDao;
 
     @Autowired
     StudentAddMutator studentAddMutator;
@@ -53,8 +57,9 @@ public class ProjectController {
 
     @GetMapping(value = "/updateStudent")
     public String updateStudent() {
-//        studentDao.testGetStudent();
-        studentDao.testUpdateStudent();
+//        studentDao.getStudent();
+//        studentDao.testUpdateStudent();
+        studentDao.getStudents();
         return "update-student";
     }
 
@@ -65,7 +70,7 @@ public class ProjectController {
 
     @GetMapping(value = "/viewStudents")
     public String viewStudents() {
-        studentDao.testGetStudents();
+        studentDao.getStudents();
         return "view-students";
     }
 

@@ -25,7 +25,6 @@
         <module name="demospring" />
         <module name="demoSpring" />
         <module name="group5project" />
-        <module name="project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
