@@ -58,11 +58,11 @@ public class ProjectController {
     @GetMapping(value = "/addStudent")
     public ModelAndView addStudent() {
         ModelMap modelMap = new ModelMap();
-        List<String> degrees = degreeDao.getTransferColleges();
-        List<String> programs = degreeDao.getDegrees();
+        List<String> transferColleges = degreeDao.getTransferColleges();
+        List<String> degreePrograms = degreeDao.getDegreePrograms();
         List<String> degreeLevels = degreeDao.getDegreeLevels();
-        modelMap.addAttribute("transferColleges", degrees);
-        modelMap.addAttribute("program", programs);
+        modelMap.addAttribute("transferColleges", transferColleges);
+        modelMap.addAttribute("program", degreePrograms);
         modelMap.addAttribute("degreeLevel", degreeLevels);
         return new ModelAndView("add-student", modelMap);
     }

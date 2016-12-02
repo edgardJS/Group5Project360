@@ -67,13 +67,13 @@ public class DegreeDao {
      *
      * @return list of degrees
      */
-    public List<String> getDegrees() {
-        String sql = "select degree from Degree";
+    public List<String> getDegreePrograms() {
+        String sql = "select program from Degree";
         return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
 
     public List<String> getDegreeLevels() {
-        String sql = "select program from Degree";
+        String sql = "select degree from Degree";
         return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
     
