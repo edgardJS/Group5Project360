@@ -1,10 +1,10 @@
 package com.project;
 
 import com.project.Model.AddStudentForm;
-import com.project.Model.Employment;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
+import com.project.dao.ReportDao;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -33,6 +30,8 @@ public class ProjectController {
     DegreeDao degreeDao;
     @Autowired
     EmploymentDao employmentDao;
+    @Autowired
+    ReportDao reportDao;
 
     @Autowired
     StudentAddMutator studentAddMutator;
@@ -44,16 +43,6 @@ public class ProjectController {
     
     @GetMapping(value = "/addStudent")
     public String addStudent() {
-        List<String> skill = new ArrayList<>();
-        Employment e = new Employment();
-        e.setStudentId(12345);
-        e.setCompanyName("company");
-        e.setPosition("position");
-        e.setSkills(new ArrayList<String>());
-        e.setStartDate(new java.sql.Date(new Date().getTime()));
-        e.setEndDate(new java.sql.Date(new Date().getTime()));
-        e.setIsCurrentJob(true);
-        employmentDao.addEmployment(e);
         return "add-student";
     }
 
