@@ -144,3 +144,8 @@ $(function () {
     });
 });
 
+/* Datepicker config */
+$('#addStudentForm .input-group.date').datepicker({
+    clearBtn: true
+});
+
