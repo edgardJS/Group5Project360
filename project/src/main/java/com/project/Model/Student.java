@@ -30,7 +30,6 @@ public class Student {
     ArrayList<Degree> degrees;
     ArrayList<String> transferColleges;
     ArrayList<Employment> employments;
-    Double gpa;
 
     public String toString() {
         return String.format("%s %s %s %s %s", id, firstName, lastName, uwEmail, email);

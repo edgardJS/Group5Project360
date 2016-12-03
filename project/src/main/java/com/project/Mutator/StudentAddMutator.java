@@ -38,7 +38,7 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-        studentDao.testAddStudent(student);
+        studentDao.addStudent(student);
         if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
             createDegree(addStudentForm);
         }
