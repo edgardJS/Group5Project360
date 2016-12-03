@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import com.project.Model.Degree;
+import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,12 +15,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Brian on 11/30/2016.
+ * This class holds database queries and actions for the degree class/table.
+ *
+ * @author Brian Jorgenson
  */
 @Repository
 public class DegreeDao {
+
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     
     /**
      * Adds a degree that is associated to a student by studentId.
@@ -67,6 +71,48 @@ public class DegreeDao {
      *
      * @return list of degrees
      */
+    public List<Degree> getDegrees() {
+        String sql = "select * from Degree";
+        return makeListDegree(sql);
+    }
+
+    /**
+     * Gets a list of degrees by level.
+     *
+     * @param level level to get by
+     * @return list of degrees
+     */
+    public List<Degree> getDegreeByLevel(Degree level) {
+        String sql = "select * from Degree where degree = " + level.getDegreeLevel();
+        return makeListDegree(sql);
+    }
+
+    /**
+     * Gets a list of degrees by program.
+     *
+     * @param program program to get by
+     * @return list of degrees
+     */
+    public List<Degree> getDegreeByProgram(Degree program) {
+        String sql = "select * from Degree where program = " + program.getProgram();
+        return makeListDegree(sql);
+    }
+
+    /**
+     * Makes a list of degrees from an sql query.
+     *
+     * @param sql sql query
+     * @return list of degrees
+     */
+    private List<Degree> makeListDegree(String sql) {
+        List<Degree> degrees = new ArrayList<>();
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+        for (Map row: rows) {
+            Degree degree = new Degree();
+            degree.setProgram((String) row.get("program"));
+            degree.setDegreeLevel((String)row.get("degree"));
+        }
+        return degrees;
     public List<String> getDegreePrograms() {
         String sql = "select program from Degree";
         return (List<String>) jdbcTemplate.queryForList(sql, String.class);
@@ -80,12 +126,14 @@ public class DegreeDao {
     /**
      * Gets a specific degree by id from a student.
      *
-     * @param id degreeId to get
+     * @param degreeId degree id to get
+     * @param studentId student to get from
      * @return degree from DB
      */
-    public Degree getDegree(int id) {
-        String sql = "select * from StudentDegree where degreeId = ?";
-        return  (Degree) jdbcTemplate.queryForObject(sql, new Object[]{id}, new DegreeRowMapper());
+    public Degree getStudentDegree(int degreeId, int studentId) {
+        String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
+        Object[] parameters = new Object[] {degreeId, studentId};
+        return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
 
     }
 

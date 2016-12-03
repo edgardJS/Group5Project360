@@ -12,9 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by edgards on 11/30/16.
@@ -40,7 +38,7 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-        studentDao.testAddStudent(student);
+        studentDao.addStudent(student);
         if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
             createDegree(addStudentForm);
         }

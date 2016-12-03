@@ -5,10 +5,9 @@ import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
+import com.project.dao.ReportDao;
 import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -35,12 +34,12 @@ public class ProjectController {
 
     @Autowired
     StudentDao studentDao;
-
     @Autowired
     DegreeDao degreeDao;
-
     @Autowired
     EmploymentDao employmentDao;
+    @Autowired
+    ReportDao reportDao;
 
     @Autowired
     StudentAddMutator studentAddMutator;
@@ -48,11 +47,6 @@ public class ProjectController {
     @GetMapping(value = "/main")
     public String main() {
         return "main";
-    }
-
-    @GetMapping(value = "/header")
-    public String header() {
-        return "header";
     }
 
     @GetMapping(value = "/addStudent")
@@ -105,7 +99,7 @@ public class ProjectController {
 
     @GetMapping(value = "/viewStudents")
     public String viewStudents() {
-        studentDao.getStudents();
         return "view-students";
     }
+
 }
