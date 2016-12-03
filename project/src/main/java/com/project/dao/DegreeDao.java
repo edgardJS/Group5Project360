@@ -23,7 +23,7 @@ import java.util.Map;
 public class DegreeDao {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
     
     /**
      * Adds a degree that is associated to a student by studentId.
@@ -113,14 +113,6 @@ public class DegreeDao {
             degree.setDegreeLevel((String)row.get("degree"));
         }
         return degrees;
-    public List<String> getDegreePrograms() {
-        String sql = "select program from Degree";
-        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
-    }
-
-    public List<String> getDegreeLevels() {
-        String sql = "select degree from Degree";
-        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
     
     /**
@@ -135,6 +127,16 @@ public class DegreeDao {
         Object[] parameters = new Object[] {degreeId, studentId};
         return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
 
+    }
+
+    public List<String> getDegreePrograms() {
+        String sql = "select program from Degree";
+        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+    }
+
+    public List<String> getDegreeLevels() {
+        String sql = "select degree from Degree";
+        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
 
     public List<String> getTransferColleges() {

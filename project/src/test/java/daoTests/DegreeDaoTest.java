@@ -1,9 +1,10 @@
-package com.project.Tests;
+package daoTests;
 
 import com.project.Model.Degree;
 import com.project.dao.DegreeDao;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.SQLDataException;
@@ -17,8 +18,11 @@ import static org.junit.Assert.*;
  */
 public class DegreeDaoTest {
 
-    @Autowired
-    private DegreeDao Dao;
+//    @Autowired
+//    private DegreeDao Dao;
+
+    @Mock
+    DegreeDao Dao;
 
     private Degree degree;
 

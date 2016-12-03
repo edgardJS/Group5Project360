@@ -1,0 +1,12 @@
+body { padding-top: 70px; }
+
+#success_message{ display: none;}
+
+#degree-container, #employment-container {
+    display: none;
+}
+
+#degree-plus, #employment-plus {
+    padding-bottom: 10px;
+    font-size: 20px;
+}

@@ -19,14 +19,17 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
 
     <!-- Datepicker -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css.map" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.css.map"
+          rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="css/add-student.css" rel="stylesheet">
 </head>
 
 <body>
@@ -40,6 +43,8 @@
 
             <!-- Form Name -->
             <legend class="col-md-12">Add a Student</legend>
+
+            <div id="student-conatiner" class="col-md-12">
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">Student ID</label>
                 <div class="col-md-6 inputGroupContainer">
@@ -51,7 +56,6 @@
             </div>
 
             <!-- Text input-->
-
             <div class="form-group col-md-6">
                 <label class="col-md-6 control-label">First Name</label>
                 <div class="col-md-6 inputGroupContainer">
@@ -94,216 +98,223 @@
                     </div>
                 </div>
             </div>
+            </div>
 
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Degree Level</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <select name="degreeLevel" class="form-control selectpicker">
-                            <option value=" ">Select degree level</option>
-                            {{#degreeLevel}}
-                            <option value="{{.}}">{{.}}</option>
-                            {{/degreeLevel}}
-                        </select>
+            <h3><span id="degree-plus" class="glyphicon glyphicon-plus col-md-12">Degree(optional)</span></h3>
+            <div id="degree-container" class="form-group col-md-12">
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Degree Level</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                            <select name="degreeLevel" class="form-control selectpicker">
+                                <option value=" ">Select degree level</option>
+                                {{#degreeLevel}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/degreeLevel}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Degree Program</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                            <select name="program" class="form-control selectpicker">
+                                <option value=" ">Select degree program</option>
+                                {{#program}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/program}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Graduation Term</label>
+                    <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <select name="graduationTerm" class="form-control selectpicker">
+                                <option value=" ">Select graduation term</option>
+                                <option>Fall</option>
+                                <option>Winter</option>
+                                <option>Spring</option>
+                                <option>Summer</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Graduation Year</label>
+                    <div class="col-md-6 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <select name="graduationYear" class="form-control selectpicker">
+                                <option value=" ">Select graduation year</option>
+                                <option>2001</option>
+                                <option>2002</option>
+                                <option>2003</option>
+                                <option>2004</option>
+                                <option>2005</option>
+                                <option>2006</option>
+                                <option>2007</option>
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option> 2017</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Transfer Schools</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                            <select name="transferSchools" class="form-control selectpicker">
+                                <option value=" ">Select transfer school</option>
+                                {{#transferColleges}}
+                                <option value="{{.}}">{{.}}</option>
+                                {{/transferColleges}}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">GPA</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                            <input name="gpa" placeholder="4.0" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Degree Program</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <select name="program" class="form-control selectpicker">
-                            <option value=" ">Select degree program</option>
-                            {{#program}}
-                            <option value="{{.}}">{{.}}</option>
-                            {{/program}}
-                        </select>
+            <h3><span id="employment-plus" class="glyphicon glyphicon-plus col-md-12">Employment(optional)</span></h3>
+            <div id="employment-container" class="form-group col-md-12">
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Company Name</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                            <input name="companyName" placeholder="Google" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Graduation Term</label>
-                <div class="col-md-6 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <select name="graduationTerm" class="form-control selectpicker">
-                            <option value=" ">Select graduation term</option>
-                            <option>Fall</option>
-                            <option>Winter</option>
-                            <option>Spring</option>
-                            <option>Summer</option>
-                        </select>
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Position</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                            <input name="position" placeholder="Software Engineer" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Graduation Year</label>
-                <div class="col-md-6 selectContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <select name="graduationYear" class="form-control selectpicker">
-                            <option value=" ">Select graduation year</option>
-                            <option>2001</option>
-                            <option>2002</option>
-                            <option>2003</option>
-                            <option>2004</option>
-                            <option>2005</option>
-                            <option>2006</option>
-                            <option>2007</option>
-                            <option>2008</option>
-                            <option>2009</option>
-                            <option> 2010</option>
-                            <option>2011</option>
-                            <option>2012</option>
-                            <option>2013</option>
-                            <option>2014</option>
-                            <option>2015</option>
-                            <option>2016</option>
-                            <option> 2017</option>
-                        </select>
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Skills</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                            <input name="skills" placeholder="Skills" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Transfer Schools</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <select name="transferSchools" class="form-control selectpicker">
-                            <option value=" ">Select transfer school</option>
-                            {{#transferColleges}}
-                            <option value="{{.}}">{{.}}</option>
-                            {{/transferColleges}}
-                        </select>
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Skills</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                            <input name="skills" placeholder="Enter skills" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">GPA</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input name="gpa" placeholder="4.0" class="form-control" type="text">
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Start Date</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input name="startDate" placeholder="Enter start date" type="text" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Company Name</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="companyName" placeholder="Google" class="form-control" type="text">
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">End Date</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            <input name="endDate" placeholder="Enter end date" type="text" class="form-control">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Position</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="position" placeholder="Software Engineer" class="form-control" type="text">
+                <!-- Text input-->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Salary</label>
+                    <div class="col-md-6 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
+                            <input name="salary" placeholder="1,000,000" class="form-control" type="text">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Skills</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="skills" placeholder="Skills" class="form-control" type="text">
+                <!-- radio checks -->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Current Job?</label>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="currentJob" value="yes"/> Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="currentJob" value="no"/> No
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Skills</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="skills" placeholder="Enter skills" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Start Date</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group date">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input name="startDate" placeholder="Enter start date" type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">End Date</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group date">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                        <input name="endDate" placeholder="Enter end date" type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Salary</label>
-                <div class="col-md-6 inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                        <input name="salary" placeholder="1,000,000" class="form-control" type="text">
-                    </div>
-                </div>
-            </div>
-
-            <!-- radio checks -->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Current Job?</label>
-                <div class="col-md-6">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="currentJob" value="yes"/> Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="currentJob" value="no"/> No
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- radio checks -->
-            <div class="form-group col-md-6">
-                <label class="col-md-6 control-label">Will be Hired?</label>
-                <div class="col-md-6">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="willBeHired" value="yes"/> Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="willBeHired" value="no"/> No
-                        </label>
+                <!-- radio checks -->
+                <div class="form-group col-md-6">
+                    <label class="col-md-6 control-label">Will be Hired?</label>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="willBeHired" value="yes"/> Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="willBeHired" value="no"/> No
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

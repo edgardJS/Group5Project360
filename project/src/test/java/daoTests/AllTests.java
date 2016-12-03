@@ -1,4 +1,4 @@
-package com.project.Tests;
+package daoTests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

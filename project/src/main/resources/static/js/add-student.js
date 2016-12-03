@@ -149,3 +149,15 @@ $('#addStudentForm .input-group.date').datepicker({
     clearBtn: true
 });
 
+$("#employment-plus").click(function() {
+    $( "#employment-container" ).slideToggle( "slow", function() {
+        // Do stuff here if needed maybe validation and change plus to minus?
+    });
+});
+
+$("#degree-plus").click(function() {
+    $( "#degree-container" ).slideToggle( "slow", function() {
+        // Do stuff here if needed maybe validation and change plus to minus?
+    });
+});
+
