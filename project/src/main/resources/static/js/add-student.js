@@ -60,7 +60,12 @@ $(document).ready(function () {
             gpa: {
                 validators: {
                     stringLength: {
-                        min: 3,
+                        min: 3
+                    },
+                    between: {
+                      min: 0.0,
+                        max: 4.0,
+                        message: 'GPA must be between 0.0 and 4.0'
                     },
                     notEmpty: {
                         message: 'Please supply your GPA'
@@ -70,7 +75,6 @@ $(document).ready(function () {
                     }
                 }
             },
-            //Add Drop Downs
             degreeLevel: {
                 validators: {
                     notEmpty: {
@@ -78,25 +82,10 @@ $(document).ready(function () {
                     }
                 }
             },
-            //Add Drop Downs
             program: {
                 validators: {
                     notEmpty: {
                         message: 'Please supply your degree program'
-                    }
-                }
-            },
-            graduationTerm: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your graduation term'
-                    }
-                }
-            },
-            graduationYear: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your graduation year'
                     }
                 }
             }
@@ -122,6 +111,7 @@ $(function () {
 /* Datepicker config */
 $('#addStudentForm .input-group.date').datepicker({
     clearBtn: true
+
 });
 
 $("#employment-plus").click(function() {
