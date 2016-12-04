@@ -10,6 +10,7 @@ import com.project.dao.StudentDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,7 +29,7 @@ public class StudentAddMutator {
     @Autowired
     EmploymentDao employmentDao;
 
-    public void parseData(AddStudentForm addStudentForm) throws ParseException {
+    public String submitAddStudent(AddStudentForm addStudentForm) throws ParseException {
         Student student = new Student();
         student.setId(addStudentForm.getId());
         student.setLastName(addStudentForm.getLastName());
@@ -38,12 +39,18 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-        studentDao.addStudent(student);
-        if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
-            createDegree(addStudentForm);
-        }
-        if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
-            createEmployment(addStudentForm);
+        try {
+            studentDao.addStudent(student);
+            if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
+                createDegree(addStudentForm);
+            }
+            if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
+                createEmployment(addStudentForm);
+            }
+            return "success";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return e.toString();
         }
     }
 

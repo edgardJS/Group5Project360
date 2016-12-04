@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class StudentDao {
      *
      * @param student student to add
      */
-    public void addStudent(Student student) {
+    public void addStudent(Student student) throws SQLException {
         String sql = "insert into Student(studentId, lastName, firstName, uwEmail, externalEmail) "
                 + "values (?, ?, ?, ?, ?)";
         Object[] parameters = {student.getId(), student.getLastName(), student.getFirstName(),

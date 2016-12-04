@@ -21,9 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -74,13 +73,19 @@ public class ProjectController {
     @PostMapping(value = "/addStudentForm")
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
-                                                 Model model) throws Exception {
+                                                 Model model) throws Exception, SQLException {
         // if any errors, re-render the user info edit form
         if (result.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } else {
-            studentAddMutator.parseData(addStudentForm);
-            return ResponseEntity.ok("success");
+            //studentAddMutator.submitAddStudent(addStudentForm);
+            try {
+                studentAddMutator.submitAddStudent(addStudentForm);
+                return ResponseEntity.ok(studentAddMutator.submitAddStudent(addStudentForm));
+            } catch (Exception e) {
+                e.getCause().getMessage();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
+            }
         }
     }
 

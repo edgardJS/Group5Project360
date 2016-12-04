@@ -108,7 +108,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                             <select name="degreeLevel" class="form-control selectpicker">
-                                <option value=" ">Select degree level</option>
+                                <option value="">Select degree level</option>
                                 {{#degreeLevel}}
                                 <option value="{{.}}">{{.}}</option>
                                 {{/degreeLevel}}
@@ -123,7 +123,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                             <select name="program" class="form-control selectpicker">
-                                <option value=" ">Select degree program</option>
+                                <option value="">Select degree program</option>
                                 {{#program}}
                                 <option value="{{.}}">{{.}}</option>
                                 {{/program}}
@@ -138,7 +138,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <select name="graduationTerm" class="form-control selectpicker">
-                                <option value=" ">Select graduation term</option>
+                                <option value="">Select graduation term</option>
                                 <option>Fall</option>
                                 <option>Winter</option>
                                 <option>Spring</option>
@@ -154,7 +154,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <select name="graduationYear" class="form-control selectpicker">
-                                <option value=" ">Select graduation year</option>
+                                <option value="">Select graduation year</option>
                                 <option>2001</option>
                                 <option>2002</option>
                                 <option>2003</option>
@@ -184,7 +184,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                             <select name="transferSchools" class="form-control selectpicker">
-                                <option value=" ">Select transfer school</option>
+                                <option value="">Select transfer school</option>
                                 {{#transferColleges}}
                                 <option value="{{.}}">{{.}}</option>
                                 {{/transferColleges}}
@@ -289,14 +289,8 @@
                     <label class="col-md-6 control-label">Current Job?</label>
                     <div class="col-md-6">
                         <div class="radio">
-                            <label>
-                                <input type="radio" name="currentJob" value="yes"/> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="currentJob" value="no"/> No
-                            </label>
+                                <input type="radio" name="currentJob" value="true" checked/> Yes<br>
+                                <input type="radio" name="currentJob" value="false"> No
                         </div>
                     </div>
                 </div>
@@ -306,14 +300,8 @@
                     <label class="col-md-6 control-label">Will be Hired?</label>
                     <div class="col-md-6">
                         <div class="radio">
-                            <label>
-                                <input type="radio" name="willBeHired" value="yes"/> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="willBeHired" value="no"/> No
-                            </label>
+                                <input type="radio" name="willBeHired" value="true" checked/> Yes<br>
+                                <input type="radio" name="willBeHired" value="false"/> No
                         </div>
                     </div>
                 </div>
@@ -322,6 +310,11 @@
             <!-- Success message -->
             <div class="alert alert-success" role="alert" id="success_message">Success <i
                     class="glyphicon glyphicon-thumbs-up"></i> Student Added
+            </div>
+
+            <!-- Fail message -->
+            <div class="alert alert-danger col-md-12" role="alert" id="failed_message">Failed <i
+                    class="glyphicon glyphicon-thumbs-down"></i> Student NOT Added
             </div>
 
             <!-- Button -->

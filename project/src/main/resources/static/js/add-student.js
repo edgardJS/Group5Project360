@@ -101,36 +101,11 @@ $(document).ready(function () {
                 }
             }
         }
-    })
-        .on('success.form.bv', function (e) {
-            $('#success_message').slideDown({opacity: "show"}, "slow");// Do something ...
-            $('#addStudentForm').data('bootstrapValidator').resetForm();
-        });
-
-    // submitting form using ajax but out here now
-    // it does not refresh and sending back from
-    // back end a 400 if there is errors, else
-    // sending back a 200 and success is hit.
-    $form = $("#addStudentForm");
-    //callback handler for form submit
-    $form.submit(function (e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        $.ajax(
-            {
-                url: formURL,
-                type: "POST",
-                data: postData,
-                success: function (data, textStatus, jqXHR) {
-                    $('#success_message').slideDown({opacity: "show"}, "slow");
-                    $("#addStudentForm")[0].reset();
-                    $form.data('bootstrapValidator').resetForm();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                }
-            });
-        e.preventDefault();
     });
+        // .on('success.form.bv', function (e) {
+        //     $('#success_message').slideDown({opacity: "show"}, "slow");// Do something ...
+        //     $('#addStudentForm').data('bootstrapValidator').resetForm();
+        // });
 });
 
 /*
@@ -159,5 +134,40 @@ $("#degree-plus").click(function() {
     $( "#degree-container" ).slideToggle( "slow", function() {
         // Do stuff here if needed maybe validation and change plus to minus?
     });
+});
+
+// submitting form using ajax but out here now
+// it does not refresh and sending back from
+// back end a 400 if there is errors, else
+// sending back a 200 and success is hit.
+$form = $("#addStudentForm");
+//callback handler for form submit
+$form.unbind('submit').submit(function (e) {
+    e.preventDefault();
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    var response = $.ajax(
+        {
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function (response) {
+                $('#success_message').slideDown({opacity: "show"}, "slow");
+                $("#addStudentForm")[0].reset();
+                $form.data('bootstrapValidator').resetForm();
+                return false;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+        .fail(function(e) {
+            $('#failed_message').slideDown({opacity: "show"}, "slow");
+            $("#addStudentForm")[0].reset();
+            return false;
+        });
+    //response.preventDefault();
+    e.stopImmediatePropagation();
+    return false;
 });
 
