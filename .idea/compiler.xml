@@ -22,9 +22,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="demospring" />
-        <module name="demoSpring" />
         <module name="group5project" />
+        <module name="project" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

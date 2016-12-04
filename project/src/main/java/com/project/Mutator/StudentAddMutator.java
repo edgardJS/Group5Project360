@@ -6,7 +6,7 @@ import com.project.Model.Employment;
 import com.project.Model.Student;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
-import com.project.dao.StudentDao;
+import com.project.dao.StudentDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ import java.util.Date;
 @Component
 public class StudentAddMutator {
     @Autowired
-    StudentDao studentDao;
+    StudentDaoImpl studentDaoImpl;
 
     @Autowired
     DegreeDao degreeDao;
@@ -40,8 +40,8 @@ public class StudentAddMutator {
             student.setEmail(addStudentForm.getEmail());
         }
         try {
-            studentDao.addStudent(student);
             if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
+                studentDaoImpl.addStudent(student);
                 createDegree(addStudentForm);
             }
             if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {

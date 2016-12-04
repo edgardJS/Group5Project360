@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by Brian on 12/1/2016.
  */
-public class StudentDaoTest {
+public class StudentDaoImplImplTest {
     @Before
     public void setUp() throws Exception {
         

@@ -6,7 +6,7 @@ import com.project.Mutator.StudentAddMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
 import com.project.dao.ReportDao;
-import com.project.dao.StudentDao;
+import com.project.dao.StudentDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -34,7 +31,7 @@ import java.util.List;
 public class ProjectController {
 
     @Autowired
-    StudentDao studentDao;
+    StudentDaoImpl studentDaoImpl;
 
     @Autowired
     DegreeDao degreeDao;
@@ -70,41 +67,38 @@ public class ProjectController {
         return new ModelAndView("add-student", modelMap);
     }
 
-    @PostMapping(value = "/addStudentForm")
+    //@PostMapping(value = "/addStudentForm")
+    @RequestMapping(value = "addStudentForm", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm, BindingResult result,
-                                                 Model model) throws Exception, SQLException {
-        // if any errors, re-render the user info edit form
-        if (result.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        } else {
+    public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
             //studentAddMutator.submitAddStudent(addStudentForm);
             try {
                 studentAddMutator.submitAddStudent(addStudentForm);
+                System.out.println("Controller hit after student");
                 return ResponseEntity.ok(studentAddMutator.submitAddStudent(addStudentForm));
             } catch (Exception e) {
-                e.getCause().getMessage();
+                //e.getCause().getMessage();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
             }
-        }
     }
 
     @PostMapping(value = "/searchStudent")
     @ResponseBody
     public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
         Integer id = Integer.valueOf(studentId);
-        Student student = studentDao.getStudent(id);
+        Student student = studentDaoImpl.getStudent(id);
+        viewStudents(student);
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("student", student);
-        return new ModelAndView("updateStudent", modelMap);
+        return new ModelAndView("view-edit-student", modelMap);
     }
 
-    @GetMapping(value = "/updateStudent")
+    @GetMapping(value = "/searchStudent")
     public String updateStudent(@RequestParam(value = "student", required = false) Student student) {
 //        studentDao.getStudent();
 //        studentDao.testUpdateStudent();
-        studentDao.getStudents();
-        return "update-student";
+        studentDaoImpl.getStudents();
+        return "search-student";
     }
 
     @GetMapping(value = "/createReport")
@@ -113,8 +107,9 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/viewStudents")
-    public String viewStudents() {
-        return "view-students";
+    private ModelAndView viewStudents(Student student) {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("student", student);
+        return new ModelAndView("view-edit-student", modelMap);
     }
-
 }

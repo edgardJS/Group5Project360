@@ -20,7 +20,7 @@
     <link rel="https:////cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
 
     <!-- Custom CSS -->
-    <link href="css/index.css" rel="stylesheet">
+    <link href="css/add-student.css" rel="stylesheet">
 </head>
 <body>
 
@@ -33,10 +33,11 @@
             <a href="/main" class="btn btn-info" role="button">Back to main</a>
         </div>
         <div class="col-sm-8">
-            <h1>Form</h1>
+            <h1>Search for student</h1>
             <form id="searchStudentForm" action="/searchStudent" method="post">
                 <p>id: <input type="text" name="studentId"/></p>
-                <p><input type="submit" value="Submit"/>
+                <button class="btn btn-warning">Send <span class="glyphicon glyphicon-send"></span>
+                </button>
             </form>
         </div>
     </div>
@@ -57,6 +58,6 @@
 <![endif]-->
 
 <!-- Form Validation JS -->
-<script src="js/update-student.js"></script>
+<script src="js/search-student.js"></script>
 </body>
 </html>
