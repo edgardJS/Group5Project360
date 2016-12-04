@@ -144,6 +144,7 @@ $form.submit(function (e) {
             data: postData,
             success: function (response) {
                 $('#success_message').slideDown({opacity: "show"}, "slow");
+                $('#failed_message').slideUp({opacity: "hide"}, "slow");
                 $("#addStudentForm")[0].reset();
                 $form.data('bootstrapValidator').resetForm();
                 return false;

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by edgards on 11/30/16.
@@ -29,7 +29,7 @@ public class StudentAddMutator {
     @Autowired
     EmploymentDao employmentDao;
 
-    public String submitAddStudent(AddStudentForm addStudentForm) throws ParseException {
+    public boolean submitAddStudent(AddStudentForm addStudentForm) {
         Student student = new Student();
         student.setId(addStudentForm.getId());
         student.setLastName(addStudentForm.getLastName());
@@ -39,19 +39,18 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-        try {
             if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
-                studentDaoImpl.addStudent(student);
-                createDegree(addStudentForm);
+                if (checkStudentDupe(student)) {
+                    return false;
+                } else {
+                    studentDaoImpl.addStudent(student);
+                    createDegree(addStudentForm);
+                }
             }
             if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
                 createEmployment(addStudentForm);
             }
-            return "success";
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return e.toString();
-        }
+            return true;
     }
 
     private Degree createDegree(AddStudentForm addStudentForm) {
@@ -66,24 +65,29 @@ public class StudentAddMutator {
         return degree;
     }
 
-    private Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
+    private Employment createEmployment(AddStudentForm addStudentForm) {
         Employment employment = new Employment();
         employment.setStudentId(addStudentForm.getId());
         employment.setCompanyName(addStudentForm.getCompanyName());
         employment.setPosition(addStudentForm.getPosition());
         employment.setSkills(addStudentForm.getSkills());
-        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
-            Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getStartDate());
-            employment.setStartDate(startDate);
-        }
-        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
-            Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getEndDate());
-            employment.setStartDate(endDate);
-        }
+//        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
+//            //Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getStartDate());
+//            //employment.setStartDate(startDate);
+//        }
+//        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
+//            /Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getEndDate());
+//            //employment.setStartDate(endDate);
+//        }
         employment.setIsCurrentJob(addStudentForm.getIsCurrentJob());
         employment.setInternship(addStudentForm.getIsInternship());
         employment.setWillBeHired(addStudentForm.getWillBeHired());
         employmentDao.addEmployment(employment);
         return  employment;
+    }
+
+    private boolean checkStudentDupe(Student student) {
+        List<Student> studentList = studentDaoImpl.getStudents();
+        return studentList.stream().filter(s -> Objects.equals(s.getId(), student.getId())).findAny().isPresent();
     }
 }

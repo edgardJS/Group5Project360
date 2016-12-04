@@ -2,6 +2,7 @@ package com.project.dao;
 
 import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,20 +28,25 @@ import java.util.stream.Collectors;
 public class StudentDaoImpl implements StudentDao{
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
     
     /**
      * Adds a student.
      *
      * @param student student to add
      */
-    public void addStudent(Student student) throws SQLException {
+    public void addStudent(Student student) {
         String sql = "insert into Student(studentId, lastName, firstName, uwEmail, externalEmail) "
                 + "values (?, ?, ?, ?, ?)";
         Object[] parameters = {student.getId(), student.getLastName(), student.getFirstName(),
                             student.getUwEmail(), student.getEmail()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR};
-        jdbcTemplate.update(sql, parameters, types);
+        try {
+            jdbcTemplate.update(sql, parameters, types);
+        }
+        catch (DataIntegrityViolationException e) {
+            System.out.println("history already exist");
+        }
     }
     
     /**
@@ -53,7 +59,7 @@ public class StudentDaoImpl implements StudentDao{
                     + "where studentId = ?";
         Object[] parameters = {student.getUwEmail(), student.getEmail(), student.getId()};
         int[] types = {Types.VARCHAR, Types.VARCHAR};
-        jdbcTemplate.update(sql, parameters, types);
+            jdbcTemplate.update(sql, parameters, types);
     }
     
     /**

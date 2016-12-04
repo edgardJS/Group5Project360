@@ -68,14 +68,18 @@ public class ProjectController {
     }
 
     //@PostMapping(value = "/addStudentForm")
-    @RequestMapping(value = "addStudentForm", method = RequestMethod.POST)
+    @RequestMapping(value = "/addStudentForm", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
             //studentAddMutator.submitAddStudent(addStudentForm);
             try {
-                studentAddMutator.submitAddStudent(addStudentForm);
-                System.out.println("Controller hit after student");
-                return ResponseEntity.ok(studentAddMutator.submitAddStudent(addStudentForm));
+                if (studentAddMutator.submitAddStudent(addStudentForm)) {
+                    studentAddMutator.submitAddStudent(addStudentForm);
+                    return ResponseEntity.ok("success");
+                }
+                else {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate");
+                }
             } catch (Exception e) {
                 //e.getCause().getMessage();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
