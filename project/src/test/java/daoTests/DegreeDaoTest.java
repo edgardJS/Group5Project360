@@ -1,28 +1,32 @@
-package daoTests;
+package com.project.Tests;
 
 import com.project.Model.Degree;
 import com.project.dao.DegreeDao;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.sql.SQLDataException;
-import java.sql.SQLException;
-
-import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
-import static org.junit.Assert.*;
 
 /**
  * Created by Brian on 12/1/2016.
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class DegreeDaoTest {
 
 //    @Autowired
 //    private DegreeDao Dao;
 
-    @Mock
-    DegreeDao Dao;
+    @Autowired
+    DegreeDao degreeDao;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     private Degree degree;
 
@@ -40,27 +44,28 @@ public class DegreeDaoTest {
     @Test
     public void addStudentDegree() throws Exception {
         try {
-            Dao.addStudentDegree(degree);
+            jdbcTemplate = new JdbcTemplate();
+            degreeDao.addStudentDegree(degree);
         } catch (Exception e) {
-            fail("Failure to add to StudentDegree table");
+            Assert.fail("Failure to add to StudentDegree table with exception " + e);
         }
     }
     
     @Test
     public void getStudentDegrees() throws Exception {
-        assertNotNull("StudentDegrees returned null",
-                        Dao.getStudentDegrees(12345));
+        Assert.assertNotNull("StudentDegrees returned null",
+                        degreeDao.getStudentDegrees(12345));
     }
     
     @Test
     public void getDegrees() throws Exception {
-        assertNotNull("Degrees returned null",
-                        Dao.getDegrees());
+        Assert.assertNotNull("Degrees returned null",
+                        degreeDao.getDegrees());
     }
     
     @Test
     public void getStudentDegree() throws Exception {
-        assertSame(degree, Dao.getStudentDegree(degree.getDegreeId(), 12345));
+        Assert.assertSame(degree, degreeDao.getStudentDegree(degree.getDegreeId(), 12345));
     }
     
 }
