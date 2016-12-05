@@ -10,7 +10,6 @@ import com.project.dao.StudentDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -45,10 +44,14 @@ public class StudentAddMutator {
                 } else {
                     studentDaoImpl.addStudent(student);
                     createDegree(addStudentForm);
+                    if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
+                        try {
+                            createEmployment(addStudentForm);
+                        } catch (ParseException e) {
+                            return false;
+                        }
+                    }
                 }
-            }
-            if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
-                createEmployment(addStudentForm);
             }
             return true;
     }
@@ -65,20 +68,23 @@ public class StudentAddMutator {
         return degree;
     }
 
-    private Employment createEmployment(AddStudentForm addStudentForm) {
+    private Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
         Employment employment = new Employment();
         employment.setStudentId(addStudentForm.getId());
         employment.setCompanyName(addStudentForm.getCompanyName());
         employment.setPosition(addStudentForm.getPosition());
         employment.setSkills(addStudentForm.getSkills());
-//        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
-//            //Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getStartDate());
-//            //employment.setStartDate(startDate);
-//        }
-//        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
-//            /Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(addStudentForm.getEndDate());
-//            //employment.setStartDate(endDate);
-//        }
+        employment.setSalary(Double.parseDouble(addStudentForm.getSalary().replaceAll(",", "")));
+        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
+            Date javaDate = new SimpleDateFormat("dd/MM/yyyy").parse(addStudentForm.getStartDate());
+            java.sql.Date date = java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(javaDate));
+            employment.setStartDate(date);
+        }
+        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
+            Date javaDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(addStudentForm.getEndDate());
+            java.sql.Date date2 = java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(javaDate2));
+            employment.setEndDate(date2);
+        }
         employment.setIsCurrentJob(addStudentForm.getIsCurrentJob());
         employment.setInternship(addStudentForm.getIsInternship());
         employment.setWillBeHired(addStudentForm.getWillBeHired());

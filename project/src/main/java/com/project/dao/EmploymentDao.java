@@ -22,10 +22,10 @@ import java.util.Map;
  */
 @Repository
 public class EmploymentDao {
-    
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
+
     /**
      * Adds an employment to the DB.
      *
@@ -33,20 +33,22 @@ public class EmploymentDao {
      */
     public void addEmployment(Employment emp) {
         String sql = "insert into Employment(studentId, company, `position`, "
-                    + "skills, startDate, endDate, salary, currentJob, "
-                    + "internship, willBehired) "
-                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        Object[] parameters = {emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
-                            emp.skillsToString(),
-                            new java.sql.Date(emp.getStartDate().getTime()),
-                            new java.sql.Date(emp.getEndDate().getTime()),
-                            emp.getSalary(), emp.getIsCurrentJob(), emp.getInternship(),
-                            emp.getWillBeHired()};
-        int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.VARCHAR,
-                Types.DATE, Types.DATE, Types.DOUBLE, Types.BIT, Types.BIT, Types.BIT};
+                + "skills, startDate, endDate, salary, currentJob, "
+                + "internship, willBehired) "
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] parameters = {
+                emp.getStudentId(), emp.getCompanyName(), emp.getPosition(),
+                emp.skillsToString(), emp.getStartDate(), emp.getEndDate(),
+                emp.getSalary(), emp.getIsCurrentJob(), emp.getInternship(),
+                emp.getWillBeHired()};
+        int[] types = {
+                Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
+                Types.VARCHAR, Types.DATE, Types.DATE,
+                Types.DOUBLE, Types.BIT, Types.BIT,
+                Types.BIT};
         jdbcTemplate.update(sql, parameters, types);
     }
-    
+
     /**
      * Updates a students employment.
      *
@@ -57,13 +59,13 @@ public class EmploymentDao {
                 + "startDate = ?, endDate = ? "
                 + "where employmentId = ? and studentId = ?";
         Object[] parameters = {emp.getCompanyName(), emp.getPosition(), emp.skillsToString(),
-                                emp.getStartDate(), emp.getEndDate(), emp.getEmploymentId(),
-                                emp.getStudentId()};
+                emp.getStartDate(), emp.getEndDate(), emp.getEmploymentId(),
+                emp.getStudentId()};
         int[] types = {Types.VARCHAR, Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.DATE,
-                        Types.INTEGER, Types.INTEGER};
+                Types.INTEGER, Types.INTEGER};
         jdbcTemplate.update(sql, parameters, types);
     }
-    
+
     /**
      * Get an employment by its id.
      *
@@ -74,8 +76,8 @@ public class EmploymentDao {
         String sql = "select * from Employment where employmentId = " + id;
         return (Employment) jdbcTemplate.queryForObject(sql, new EmploymentRowMapper());
     }
-    
-    
+
+
     /**
      * Gets all companies.
      *
@@ -90,14 +92,14 @@ public class EmploymentDao {
         }
         return companies;
     }
-    
+
     /**
      * Gets all employments from a student.
      *
      * @param student student to get employments from
      * @return list of employments
      */
-    public List<Employment> getEmployments(Student student){
+    public List<Employment> getEmployments(Student student) {
         String sql = "select * from Employment where studentId = " + student.getId();
         List<Employment> employments = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
@@ -118,7 +120,7 @@ public class EmploymentDao {
  * Gets data from row of MySQL data and maps it to an Employment.
  */
 class EmploymentRowMapper implements RowMapper {
-    
+
     @Override
     public Object mapRow(ResultSet rs, int row) throws SQLException {
         Employment employment = new Employment();

@@ -37,7 +37,7 @@ public class AddStudentForm {
     ArrayList<String> skills;
     String startDate; // converted to date
     String endDate; //converted to date
-    Double salary;
+    String salary;
     Boolean isCurrentJob;
     Boolean isInternship;
     Boolean willBeHired;
