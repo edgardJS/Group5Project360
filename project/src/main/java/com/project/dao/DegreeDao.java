@@ -1,7 +1,6 @@
 package com.project.dao;
 
 import com.project.Model.Degree;
-import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -150,6 +149,18 @@ public class DegreeDao {
                 "values('" + id + "', '" + transferSchools + "');";
 
         jdbcTemplate.update(sql);
+    }
+
+    public List<Map<String, Object>> getStudentsGraduatedByYear() {
+        String sql = "SELECT graduationYear, count(*) as NUM FROM StudentDegree GROUP BY graduationYear";
+
+        return jdbcTemplate.queryForList(sql);
+    }
+
+    public List<Map<String, Object>> getEmployedByYear() {
+        String sql = "select Year(startDate), count(*) as NUM2 From Employment GROUP BY YEAR(startDate)";
+
+        return jdbcTemplate.queryForList(sql);
     }
 }
 
