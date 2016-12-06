@@ -119,9 +119,19 @@ public class ProjectController {
         return "search-student";
     }
 
-    @GetMapping(value = "/createReport")
-    public String createReport() {
-        return "create-report";
+    @GetMapping(value = "/reportGraduatedYear")
+    public String reportGraduatedYear() {
+        return "report-graduated-year";
+    }
+
+    @GetMapping(value = "/reportSkills")
+    public String reportSkills() {
+        return "report-skills";
+    }
+
+    @GetMapping(value = "/reportInternshipEmployment")
+    public String reportInternshipEmployment() {
+        return "report-internship-employment";
     }
 
     @GetMapping(value = "/viewStudents")
