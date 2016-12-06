@@ -89,7 +89,7 @@ public class ProjectController {
     }
 
     @PostMapping(value = "/searchStudent")
-    @ResponseBody
+    //@ResponseBody
     public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
         Integer id = Integer.valueOf(studentId);
         try {
@@ -133,6 +133,17 @@ public class ProjectController {
     public ResponseEntity<String> editStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
         try {
             studentEditMutator.editStudentSubmit(addStudentForm);
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/addEmployment", method = POST)
+    @ResponseBody
+    public ResponseEntity<String> addEmploymentPost(AddStudentForm addStudentForm) throws Exception {
+        try {
+            employmentDao.addEmployment(studentAddMutator.createEmployment(addStudentForm));
             return ResponseEntity.ok("success");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());

@@ -74,7 +74,7 @@ public class StudentAddMutator {
         return degree;
     }
 
-    private Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
+    public Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
         Employment employment = new Employment();
         employment.setStudentId(addStudentForm.getId());
         employment.setCompanyName(addStudentForm.getCompanyName());
