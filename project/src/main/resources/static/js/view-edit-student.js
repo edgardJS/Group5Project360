@@ -27,6 +27,7 @@ $editForm.submit(function (e) {
         })
         .fail(function (e) {
             $('#failed_message').slideDown({opacity: "show"}, "slow");
+            $('#success_message').slideUp({opacity: "hide"}, "slow");
             $("#editStudentForm")[0].reset();
             return false;
         });

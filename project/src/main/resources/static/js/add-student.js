@@ -137,9 +137,10 @@ $form.unbind('submit').submit(function (e) {
             data: postData,
             success: function (response) {
                 $('#success_message').slideDown({opacity: "show"}, "slow");
+                $('#failed_message').slideUp({opacity: "hide"}, "slow");
                 $("#addStudentForm")[0].reset();
-                $form.data('bootstrapValidator').resetForm();
-                return false;
+                // $form.data('bootstrapValidator').resetForm();
+                // return false;
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -147,10 +148,11 @@ $form.unbind('submit').submit(function (e) {
         })
         .fail(function(e) {
             $('#failed_message').slideDown({opacity: "show"}, "slow");
+            $('#success_message').slideUp({opacity: "hide"}, "slow");
             return false;
         });
     //response.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
+    // e.stopImmediatePropagation();
+    // return false;
 });
 
