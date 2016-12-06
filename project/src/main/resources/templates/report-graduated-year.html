@@ -36,6 +36,7 @@
 <div id="header"></div>
 <div class="container">
     <h2>Graduates and Employed Graduates per Year</h2>
+    <h3>(If year is not present then no data is available for current year.)</h3>
     <div class="col-md-12">
         <script type="text/javascript">
             $.getScript('http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',function(){
@@ -44,16 +45,13 @@
                     Morris.Bar({
                         element: 'bar',
                         data: [
-                            {y: 'Jan 2014', a: 100, b: 90},
-                            {y: 'Feb 2014', a: 75,  b: 65},
-                            {y: 'Mar 2014', a: 50,  b: 40},
-                            {y: 'Apr 2014', a: 75,  b: 65},
-                            {y: 'May 2014', a: 50,  b: 40},
-                            {y: 'Jun 2014', a: 75,  b: 65}
+                            {{#data}}
+                            {y: '{{yearG}}', a: {{graduated}}, b: {{employed}}},
+                            {{/data}}
                         ],
                         xkey: 'y',
                         ykeys: ['a', 'b'],
-                        labels: ['Visitors', 'Conversions']
+                        labels: ['Graduated', 'Employed']
                     });
 
                 });

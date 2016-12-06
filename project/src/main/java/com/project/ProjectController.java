@@ -120,9 +120,6 @@ public class ProjectController {
     @GetMapping(value = "/reportGraduatedYear")
     public ModelAndView reportGraduatedYear() {
         List<Map<String, Object>> data = degreeDao.getStudentsGraduatedByYear();
-        List<Map<String, Object>> data2 = degreeDao.getEmployedByYear();
-
-
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("data", data);
         return new ModelAndView("report-graduated-year", modelMap);
