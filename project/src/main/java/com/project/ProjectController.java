@@ -14,14 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +120,9 @@ public class ProjectController {
     @GetMapping(value = "/reportGraduatedYear")
     public ModelAndView reportGraduatedYear() {
         List<Map<String, Object>> data = degreeDao.getStudentsGraduatedByYear();
+        List<Map<String, Object>> data2 = degreeDao.getEmployedByYear();
+
+
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("data", data);
         return new ModelAndView("report-graduated-year", modelMap);
