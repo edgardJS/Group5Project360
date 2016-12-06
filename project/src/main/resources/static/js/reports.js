@@ -1,0 +1,4 @@
+/*
+ Load the header and add class of current page
+ to active.
+ */

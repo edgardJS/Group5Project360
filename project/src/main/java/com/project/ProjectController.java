@@ -119,11 +119,19 @@ public class ProjectController {
         return "search-student";
     }
 
-    @GetMapping(value = "/createReport")
-    public ModelAndView createReport() {
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("report", 10);
-        return new ModelAndView("create-report", modelMap);
+    @GetMapping(value = "/reportGraduatedYear")
+    public String reportGraduatedYear() {
+        return "report-graduated-year";
+    }
+
+    @GetMapping(value = "/reportSkills")
+    public String reportSkills() {
+        return "report-skills";
+    }
+
+    @GetMapping(value = "/reportInternshipEmployment")
+    public String reportInternshipEmployment() {
+        return "report-internship-employment";
     }
 
     @GetMapping(value = "/viewStudents")
