@@ -1,39 +1,39 @@
-$(document).ready(function () {
-    $('#searchStudentForm').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            studentId: {
-                validators: {
-                    stringLength: {
-                        min: 7,
-                        max:7,
-                        message: "Please enter a 7 digit Student ID"
-                    },
-                    notEmpty: {
-                        message: "Please enter a Student ID to search for"
-                    }
-                }
-            }
-        }
-    });
-});
+// $(document).ready(function () {
+//     $('#searchStudentForm').bootstrapValidator({
+//         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+//         feedbackIcons: {
+//             valid: 'glyphicon glyphicon-ok',
+//             invalid: 'glyphicon glyphicon-remove',
+//             validating: 'glyphicon glyphicon-refresh'
+//         },
+//         fields: {
+//             studentId: {
+//                 validators: {
+//                     stringLength: {
+//                         min: 7,
+//                         max:7,
+//                         message: "Please enter a 7 digit Student ID"
+//                     },
+//                     notEmpty: {
+//                         message: "Please enter a Student ID to search for"
+//                     }
+//                 }
+//             }
+//         }
+//     });
+// });
 
 // submitting form using ajax but out here now
 // it does not refresh and sending back from
 // back end a 400 if there is errors, else
 // sending back a 200 and success is hit.
-$form = $("#editStudentForm");
+$searchForm = $("#searchStudentForm");
 //callback handler for form submit
-$form.submit(function (e) {
+$searchForm.submit(function (e) {
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
-    e.preventDefault();
-    e.stopImmediatePropagation();
+    //e.preventDefault();
+    //e.stopImmediatePropagation();
     $.ajax(
         {
             url: formURL,
@@ -42,9 +42,9 @@ $form.submit(function (e) {
             success: function (response) {
                 $('#success_message').slideDown({opacity: "show"}, "slow");
                 $('#failed_message').slideUp({opacity: "hide"}, "slow");
-                $("#editStudentForm")[0].reset();
+                $("#searchStudentForm")[0].reset();
                 //$form.data('bootstrapValidator').resetForm();
-                return false;
+                //return false;
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -52,12 +52,12 @@ $form.submit(function (e) {
         })
         .fail(function (e) {
             $('#failed_message').slideDown({opacity: "show"}, "slow");
-            $("#editStudentForm")[0].reset();
+            $("#searchStudentForm")[0].reset();
             return false;
         });
     //response.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
+    //e.stopImmediatePropagation();
+    //return false;
 });
 
 /*
@@ -68,11 +68,5 @@ $(function () {
     $("#header").load("header.html", function () {
         $('.active').removeClass('active');
         $('li[name=search-student]').addClass('active');
-    });
-});
-
-$("#employment-plus").click(function () {
-    $("#employment-container").slideToggle("slow", function () {
-        // Do stuff here if needed maybe validation and change plus to minus?
     });
 });

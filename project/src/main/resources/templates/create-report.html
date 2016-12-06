@@ -37,6 +37,33 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--<script type="text/javascript">-->
+
+        <!--window.onload = function () {-->
+            <!--var chart = new CanvasJS.Chart("chartContainer", {-->
+                <!--theme: "theme2",//theme1-->
+                <!--title:{-->
+                    <!--text: "Basic Column Chart - CanvasJS"-->
+                <!--},-->
+                <!--animationEnabled: false,   // change to true-->
+                <!--data: [-->
+                    <!--{-->
+                        <!--// Change type to "bar", "area", "spline", "pie",etc.-->
+                        <!--type: "column",-->
+                        <!--dataPoints: [-->
+                            <!--{ label: "apple",  y: 10  },-->
+                            <!--{ label: "orange", y: 15  },-->
+                            <!--{ label: "banana", y: 25  },-->
+                            <!--{ label: "mango",  y: 30  },-->
+                            <!--{ label: "grape",  y: {{#report}}{{.}}{{/report}}  }-->
+                        <!--]-->
+                    <!--}-->
+                <!--]-->
+            <!--});-->
+            <!--chart.render();-->
+        <!--}-->
+    <!--</script>-->
 </head>
 <body>
 
@@ -53,7 +80,7 @@
         </div>
         <div class="col-sm-8">
             <h1>Form</h1>
-            <form action="#" th:action="@{/submitForm}" method="post">
+            <form action="#"  method="post">
                 <p>name: <input type="text" name="name"/></p>
                 <p>id: <input type="text" name="id"/></p>
                 <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
@@ -61,6 +88,7 @@
         </div>
     </div>
 </div>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 <!-- Form Validation JS -->
 <script src="js/create-report.js"></script>

@@ -1,6 +1,7 @@
 body { padding-top: 70px; }
 
-#success_message, #failed_message {
+#success_message, #failed_message, #success_message_employment
+, #failed_message_employement, #employment-button {
     display: none;
 }
 

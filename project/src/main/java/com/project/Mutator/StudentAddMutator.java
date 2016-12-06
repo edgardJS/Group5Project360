@@ -74,7 +74,7 @@ public class StudentAddMutator {
         return degree;
     }
 
-    private Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
+    public Employment createEmployment(AddStudentForm addStudentForm) throws ParseException {
         Employment employment = new Employment();
         employment.setStudentId(addStudentForm.getId());
         employment.setCompanyName(addStudentForm.getCompanyName());
@@ -103,7 +103,7 @@ public class StudentAddMutator {
         return studentList.stream().filter(s -> Objects.equals(s.getId(), student.getId())).findAny().isPresent();
     }
 
-    public static Student createStudent(Student student, ArrayList<Degree> degree, ArrayList<Employment> employment) {
+    public static Student createStudent(Student student, ArrayList<Degree> degree, List<Employment> employment) {
         //ArrayList<String> transferColleges = new ArrayList<>();
         //transferColleges.addAll(Arrays.asList(studentDaoImpl.getStudentTransferSchool(student.getId()));
         student.setDegrees(degree);
