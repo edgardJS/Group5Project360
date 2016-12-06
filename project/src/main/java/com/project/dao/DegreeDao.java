@@ -129,7 +129,6 @@ public class DegreeDao {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
         Object[] parameters = new Object[] {degreeId, studentId};
         return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
-
     }
 
     /**
