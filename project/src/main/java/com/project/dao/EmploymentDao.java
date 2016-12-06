@@ -55,7 +55,7 @@ public class EmploymentDao {
      * @param emp employment to update
      */
     public void updateEmployment(Employment emp) {
-        String sql = "update Employment set companyName = ?, `position` = ?, skills = ? "
+        String sql = "update Employment set company = ?, `position` = ?, skills = ?, "
                 + "startDate = ?, endDate = ? "
                 + "where employmentId = ? and studentId = ?";
         Object[] parameters = {emp.getCompanyName(), emp.getPosition(), emp.skillsToString(),
@@ -110,6 +110,7 @@ public class EmploymentDao {
             employment.setPosition((String) row.get("position"));
             employment.setSkills(
                     new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
+            employments.add(employment);
         }
         return employments;
     }

@@ -23,8 +23,8 @@ import java.util.Map;
 public class DegreeDao {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
-
+    private JdbcTemplate jdbcTemplate;
+    
     /**
      * Adds a degree that is associated to a student by studentId.
      *
@@ -32,27 +32,27 @@ public class DegreeDao {
      */
     public void addStudentDegree(Degree degree) {
         String sql = "insert into StudentDegree(studentId,  degree, `program`, "
-                + "graduationTerm, graduationYear, gpa) "
-                + "values (?, ?, ?, ?, ?, ?)";
+                    + "graduationTerm, graduationYear, gpa) "
+                    + "values (?, ?, ?, ?, ?, ?)";
         Object[] parameters = {degree.getStudentId(), degree.getDegreeLevel(),
-                degree.getProgram(), degree.getGraduationTerm(),
-                degree.getGraduationYear(), degree.getGpa()};
+                                degree.getProgram(), degree.getGraduationTerm(),
+                                degree.getGraduationYear(), degree.getGpa()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
-                Types.VARCHAR, Types.INTEGER, Types.DOUBLE};
+                        Types.VARCHAR, Types.INTEGER, Types.DOUBLE};
         jdbcTemplate.update(sql, parameters, types);
     }
-
+    
     /**
      * Gets the all the degrees of a student by id.
      *
      * @param id id of student
      * @return list of degrees
      */
-    public ArrayList<Degree> getStudentDegrees(int id) {
+    public List<Degree> getStudentDegrees(int id) {
         String sql = "select * from StudentDegree where studentId = " + id;
-        ArrayList<Degree> degrees = new ArrayList<>();
+        List<Degree> degrees = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row : rows) {
+        for (Map row: rows) {
             Degree degree = new Degree();
             degree.setStudentId((Integer) row.get("studentId"));
             degree.setDegreeId((Integer) row.get("degreeId"));
@@ -65,7 +65,7 @@ public class DegreeDao {
         }
         return degrees;
     }
-
+    
     /**
      * Gets all degrees.
      * For use in combo box.
@@ -76,7 +76,7 @@ public class DegreeDao {
         String sql = "select * from Degree";
         return makeListDegree(sql);
     }
-
+    
     /**
      * Gets a list of degrees by level.
      *
@@ -87,7 +87,7 @@ public class DegreeDao {
         String sql = "select * from Degree where degree = " + level.getDegreeLevel();
         return makeListDegree(sql);
     }
-
+    
     /**
      * Gets a list of degrees by program.
      *
@@ -98,7 +98,7 @@ public class DegreeDao {
         String sql = "select * from Degree where program = " + program.getProgram();
         return makeListDegree(sql);
     }
-
+    
     /**
      * Makes a list of degrees from an sql query.
      *
@@ -108,25 +108,26 @@ public class DegreeDao {
     private List<Degree> makeListDegree(String sql) {
         List<Degree> degrees = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row : rows) {
+        for (Map row: rows) {
             Degree degree = new Degree();
             degree.setProgram((String) row.get("program"));
-            degree.setDegreeLevel((String) row.get("degree"));
+            degree.setDegreeLevel((String)row.get("degree"));
+            degrees.add(degree);
         }
         return degrees;
     }
-
+    
     /**
      * Gets a specific degree by id from a student.
      *
-     * @param degreeId  degree id to get
+     * @param degreeId degree id to get
      * @param studentId student to get from
      * @return degree from DB
      */
     public Degree getStudentDegree(int degreeId, int studentId) {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
-        Object[] parameters = new Object[]{degreeId, studentId};
-        return (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
+        Object[] parameters = new Object[] {degreeId, studentId};
+        return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
 
     }
 
@@ -161,6 +162,8 @@ class DegreeRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int row) throws SQLException {
         Degree degree = new Degree();
+        degree.setDegreeId(rs.getInt("degreeId"));
+        degree.setStudentId(rs.getInt("studentId"));
         degree.setDegreeLevel(rs.getString("degree"));
         degree.setProgram(rs.getString("program"));
         degree.setGraduationTerm(rs.getString("graduationTerm"));

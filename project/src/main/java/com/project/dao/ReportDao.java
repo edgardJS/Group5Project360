@@ -1,5 +1,6 @@
 package com.project.dao;
 
+import com.project.Model.Degree;
 import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +17,8 @@ import java.util.List;
 @Repository
 public class ReportDao {
     
+    @Autowired
+    DegreeDao degreeDao;
     
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -43,6 +46,9 @@ public class ReportDao {
         for (Integer id : studentIds) {
             sql = "select * from Student where studentId = " + id;
             students.add((Student) jdbcTemplate.queryForObject(sql, new StudentRowMapper()));
+        }
+        for (Student s : students) {
+            s.setDegrees((ArrayList<Degree>)degreeDao.getStudentDegrees(s.getId()));
         }
         return students;
     }
