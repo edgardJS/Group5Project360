@@ -7,13 +7,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class holds database queries and actions for the employment class/table.
@@ -99,20 +97,30 @@ public class EmploymentDao {
      * @param id student to get employments from
      * @return list of employments
      */
-    public ArrayList<Employment> getEmployments(int id) {
+    public List<Employment> getEmployments(int id) {
         String sql = "select * from Employment where studentId = " + id;
-        ArrayList<Employment> employments = new ArrayList<>();
+        List<Employment> employments = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row : rows) {
             Employment employment = new Employment();
             employment.setCompanyName((String) row.get("company"));
-            employment.setEmploymentId((Integer) row.get("employmentId"));
+            //employment.setEmploymentId((Integer) row.get("employmentId"));
+            employment.setStudentId(id);
             employment.setPosition((String) row.get("position"));
-            employment.setSkills(
-                    new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
+            employment.setStartDate((Date) row.get("startDate"));
+            employment.setEndDate((Date) row.get("endDate"));
+            BigDecimal salary = (BigDecimal) row.get("salary");
+            employment.setSalary(salary.doubleValue());
+            employment.setSkills(new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
+            employments.add(employment);
         }
         return employments;
     }
+
+//    public List<Employment> getJobs(int id) {
+//        String sql = "select * from Employment where studentId = " + id;
+//        return (List<Employment>) jdbcTemplate.queryForList(sql, List.class);
+//    }
 
 }
 

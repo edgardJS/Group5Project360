@@ -1,28 +1,3 @@
-$(document).ready(function () {
-    $('#searchStudentForm').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            studentId: {
-                validators: {
-                    stringLength: {
-                        min: 7,
-                        max:7,
-                        message: "Please enter a 7 digit Student ID"
-                    },
-                    notEmpty: {
-                        message: "Please enter a Student ID to search for"
-                    }
-                }
-            }
-        }
-    });
-});
-
 // submitting form using ajax but out here now
 // it does not refresh and sending back from
 // back end a 400 if there is errors, else
@@ -77,9 +52,9 @@ $form.submit(function (e) {
             type: "POST",
             data: postData,
             success: function (response) {
-                $('#success_message_employment').slideUp({opacity: "show"}, "slow");
+                $('#success_message_employment').slideDown({opacity: "show"}, "slow");
                 $('#failed_message_employment').slideUp({opacity: "hide"}, "slow");
-                $("#addEmploymentFormStudentForm")[0].reset();
+                $("#addEmploymentForm")[0].reset();
                 //$form.data('bootstrapValidator').resetForm();
                 return false;
             },
@@ -88,8 +63,8 @@ $form.submit(function (e) {
             }
         })
         .fail(function (e) {
-            $('#failed_message').slideDown({opacity: "show"}, "slow");
-            $("#editStudentForm")[0].reset();
+            $('#failed_message_employement').slideDown({opacity: "show"}, "slow");
+            $("#addEmploymentForm")[0].reset();
             return false;
         });
     //response.preventDefault();

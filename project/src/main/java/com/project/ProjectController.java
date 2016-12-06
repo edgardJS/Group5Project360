@@ -98,7 +98,7 @@ public class ProjectController {
         try {
             Student student = studentDaoImpl.getStudent(id);
             ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
-            ArrayList<Employment> employment = employmentDao.getEmployments(id);
+            List<Employment> employment = employmentDao.getEmployments(id);
             List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
             Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
             student.setTransferColleges(transferColleges);
@@ -120,8 +120,10 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/createReport")
-    public String createReport() {
-        return "create-report";
+    public ModelAndView createReport() {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("report", 10);
+        return new ModelAndView("create-report", modelMap);
     }
 
     @GetMapping(value = "/viewStudents")

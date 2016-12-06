@@ -3,6 +3,7 @@ package com.project.Model;
 import com.sun.deploy.util.StringUtils;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class Employment {
     int employmentId;
     String companyName;
     String position;
-    List<String> skills;
+    ArrayList<String> skills;
     Date startDate;
     Date endDate;
     Double salary;

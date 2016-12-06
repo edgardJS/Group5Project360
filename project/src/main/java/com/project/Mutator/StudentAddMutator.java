@@ -103,7 +103,7 @@ public class StudentAddMutator {
         return studentList.stream().filter(s -> Objects.equals(s.getId(), student.getId())).findAny().isPresent();
     }
 
-    public static Student createStudent(Student student, ArrayList<Degree> degree, ArrayList<Employment> employment) {
+    public static Student createStudent(Student student, ArrayList<Degree> degree, List<Employment> employment) {
         //ArrayList<String> transferColleges = new ArrayList<>();
         //transferColleges.addAll(Arrays.asList(studentDaoImpl.getStudentTransferSchool(student.getId()));
         student.setDegrees(degree);
