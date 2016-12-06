@@ -19,6 +19,8 @@ import java.util.Map;
  * This class holds database queries and actions for the employment class/table.
  *
  * @author Brian Jorgenson
+ * @author Edgard Solorzano
+ * @author Adam Waldron
  */
 @Repository
 public class EmploymentDao {
@@ -117,13 +119,6 @@ public class EmploymentDao {
         }
         return employments;
     }
-
-    public List<Map<String, Object>> getSkillsUsed() {
-        String sql = "select company, skills from Employment group by company";
-
-        return jdbcTemplate.queryForList(sql);
-    }
-
 }
 
 /**

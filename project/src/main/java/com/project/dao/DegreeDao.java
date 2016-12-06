@@ -17,6 +17,8 @@ import java.util.Map;
  * This class holds database queries and actions for the degree class/table.
  *
  * @author Brian Jorgenson
+ * @author Edgard Solorzano
+ * @author Adam Waldron
  */
 @Repository
 public class DegreeDao {
@@ -130,37 +132,45 @@ public class DegreeDao {
 
     }
 
+    /**
+     * Gets a list of degrees by program.
+     *
+     * @return list of degrees
+     */
     public List<String> getDegreePrograms() {
         String sql = "select program from Degree";
         return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
 
+    /**
+     * Gets a list of degrees by level.
+     *
+     * @return list of degrees
+     */
     public List<String> getDegreeLevels() {
         String sql = "select degree from Degree";
         return (List<String>) jdbcTemplate.queryForList(sql, String.class);
     }
 
+    /**
+     * Gets a list of transferColleges
+     * @return list of transfer colleges
+     */
     public List<String> getTransferColleges() {
         String query = "select * from TransferCollege";
         return (List<String>) jdbcTemplate.queryForList(query, String.class);
     }
 
+    /**
+     * Adds a transfer college to the DB
+     * @param id
+     * @param transferSchools
+     */
     public void addStudentTransferCollege(Integer id, String transferSchools) {
         String sql = "insert into StudentTransferCollege(studentId, collegeName)" +
                 "values('" + id + "', '" + transferSchools + "');";
 
         jdbcTemplate.update(sql);
-    }
-
-    public List<Map<String, Object>> getStudentsGraduatedByYear() {
-//        String sql = "SELECT graduationYear as year, count(*) as count FROM StudentDegree GROUP BY graduationYear";
-        String sql = "Select yearG, graduated, employed from (SELECT graduationYear as yearG, count(*) as graduated " +
-                "FROM StudentDegree GROUP BY graduationYear) as x, " +
-                "(select Year(startDate) as yearE, count(*) as employed " +
-                "FROM Employment GROUP BY YEAR(startDate)) as y " +
-                "where x.yearG = y.yearE";
-
-        return jdbcTemplate.queryForList(sql);
     }
 }
 

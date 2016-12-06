@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,16 +52,28 @@ public class ProjectController {
     @Autowired
     StudentEditMutator studentEditMutator;
 
+    /**
+     * The GET for the main page.
+     * @return the main.html
+     */
     @GetMapping(value = "/main")
     public String main() {
         return "main";
     }
 
+    /**
+     * The GET for the header.
+     * @return the header.html
+     */
     @GetMapping(value = "/header")
     public String header() {
         return "header";
     }
 
+    /**
+     * GET for the add student page
+     * @return the html page and model
+     */
     @GetMapping(value = "/addStudent")
     public ModelAndView addStudent() {
         ModelMap modelMap = new ModelMap();
@@ -75,6 +86,12 @@ public class ProjectController {
         return new ModelAndView("add-student", modelMap);
     }
 
+    /**
+     * Post for the add student form.
+     * @param addStudentForm
+     * @return response on a fail or success
+     * @throws Exception
+     */
     @RequestMapping(value = "/addStudentForm", method = POST)
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
@@ -90,6 +107,23 @@ public class ProjectController {
             }
     }
 
+    /**
+     * The GET for search student page.
+     * @param student
+     * @return search-student.html
+     */
+    @GetMapping(value = "/searchStudent")
+    public String updateStudent(@RequestParam(value = "student", required = false) Student student) {
+        studentDaoImpl.getStudents();
+        return "search-student";
+    }
+
+    /**
+     * The POST for searching a student.
+     * @param studentId
+     * @return the view-student.html or same page if duplicate
+     * @throws Exception
+     */
     @PostMapping(value = "/searchStudent")
     //@ResponseBody
     public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
@@ -112,33 +146,49 @@ public class ProjectController {
         }
     }
 
-    @GetMapping(value = "/searchStudent")
-    public String updateStudent(@RequestParam(value = "student", required = false) Student student) {
-        studentDaoImpl.getStudents();
-        return "search-student";
-    }
-
+    /**
+     * The GET for the report graduate and employed per year page.
+     * @return report-graduated-year.html and model
+     */
     @GetMapping(value = "/reportGraduatedYear")
     public ModelAndView reportGraduatedYear() {
-        List<Map<String, Object>> data = degreeDao.getStudentsGraduatedByYear();
+        List<Map<String, Object>> data = reportDao.getStudentsGraduatedandEmployedByYear();
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("data", data);
         return new ModelAndView("report-graduated-year", modelMap);
     }
 
+    /**
+     * The GET for the report skills page.
+     * @return report-skills.html and model
+     */
     @GetMapping(value = "/reportSkills")
     public ModelAndView reportSkills() {
-        List<Map<String, Object>> data = employmentDao.getSkillsUsed();
+        List<Map<String, Object>> data = reportDao.getSkillsUsed();
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("data", data);
         return new ModelAndView("report-skills", modelMap);
     }
 
+    /**
+     * The GET for the report for internship vs no internship page.
+     * @return report-internship-employment.html and model
+     */
     @GetMapping(value = "/reportInternshipEmployment")
-    public String reportInternshipEmployment() {
-        return "report-internship-employment";
+    public ModelAndView reportInternshipEmployment() {
+        int internToJob = reportDao.getInternshipEmployedCount();
+        int noInternToJob = reportDao.getNoInternshipEmployedCount();
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("internToJob", internToJob);
+        modelMap.addAttribute("noInternToJob", noInternToJob);
+        return new ModelAndView("report-internship-employment", modelMap);
     }
 
+    /**
+     * The GET for the view student page
+     * @param student
+     * @return view-edit-student.html and model
+     */
     @GetMapping(value = "/viewStudents")
     private ModelAndView viewStudents(Student student) {
         ModelMap modelMap = new ModelMap();
@@ -146,6 +196,12 @@ public class ProjectController {
         return new ModelAndView("view-edit-student", modelMap);
     }
 
+    /**
+     * The POST for editing a student.
+     * @param addStudentForm
+     * @return if the request was success or error.
+     * @throws Exception
+     */
     @RequestMapping(value = "/editStudentForm", method = POST)
     @ResponseBody
     public ResponseEntity<String> editStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {

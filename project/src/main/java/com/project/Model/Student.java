@@ -1,6 +1,5 @@
 package com.project.Model;
 
-import com.sun.deploy.util.StringUtils;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -32,19 +31,8 @@ public class Student {
     List<String> transferColleges;
     List<Employment> employments;
 
+    @Override
     public String toString() {
         return String.format("%s %s %s %s %s", id, firstName, lastName, uwEmail, email);
-    }
-    
-    public String degreesToString() {
-        return StringUtils.join(degrees, ", ");
-    }
-    
-    public String transferCollegesToString() {
-        return StringUtils.join(transferColleges, ", ");
-    }
-    
-    public String employmentsToString() {
-        return StringUtils.join(employments, ", ");
     }
 }
