@@ -1,27 +1,27 @@
-// $(document).ready(function () {
-//     $('#searchStudentForm').bootstrapValidator({
-//         // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-//         feedbackIcons: {
-//             valid: 'glyphicon glyphicon-ok',
-//             invalid: 'glyphicon glyphicon-remove',
-//             validating: 'glyphicon glyphicon-refresh'
-//         },
-//         fields: {
-//             studentId: {
-//                 validators: {
-//                     stringLength: {
-//                         min: 7,
-//                         max:7,
-//                         message: "Please enter a 7 digit Student ID"
-//                     },
-//                     notEmpty: {
-//                         message: "Please enter a Student ID to search for"
-//                     }
-//                 }
-//             }
-//         }
-//     });
-// });
+$(document).ready(function () {
+    $('#searchStudentForm').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            studentId: {
+                validators: {
+                    stringLength: {
+                        min: 7,
+                        max:7,
+                        message: "Please enter a 7 digit Student ID"
+                    },
+                    notEmpty: {
+                        message: "Please enter a Student ID to search for"
+                    }
+                }
+            }
+        }
+    });
+});
 
 // submitting form using ajax but out here now
 // it does not refresh and sending back from
@@ -52,6 +52,7 @@ $searchForm.submit(function (e) {
         })
         .fail(function (e) {
             $('#failed_message').slideDown({opacity: "show"}, "slow");
+            $('#success_message').slideUp({opacity: "hide"}, "slow");
             $("#searchStudentForm")[0].reset();
             return false;
         });

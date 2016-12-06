@@ -21,3 +21,9 @@
     white-space:nowrap;
     margin:0.1em 0
 }
+
+body { padding-top: 70px; }
+
+.jumbotron {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/systemsBackground.png");
+}

@@ -1,7 +1,7 @@
 body { padding-top: 70px; }
 
 .jumbotron {
-    background-image: url("../images/systemsBackground.png");
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/systemsBackground.png");
 }
 
 #success_message, #failed_message, #success_message_employment
