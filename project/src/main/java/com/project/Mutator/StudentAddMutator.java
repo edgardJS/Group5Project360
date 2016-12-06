@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Created by edgards on 11/30/16.
@@ -38,22 +39,22 @@ public class StudentAddMutator {
         if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
             student.setEmail(addStudentForm.getEmail());
         }
-            if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
-                if (checkStudentDupe(student)) {
-                    return false;
-                } else {
-                    studentDaoImpl.addStudent(student);
-                    createDegree(addStudentForm);
-                    if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
-                        try {
-                            createEmployment(addStudentForm);
-                        } catch (ParseException e) {
-                            return false;
-                        }
+        if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
+            if (checkStudentDupe(student)) {
+                return false;
+            } else {
+                studentDaoImpl.addStudent(student);
+                createDegree(addStudentForm);
+                if (addStudentForm.getCompanyName() != null && !addStudentForm.getCompanyName().isEmpty()) {
+                    try {
+                        createEmployment(addStudentForm);
+                    } catch (ParseException e) {
+                        return false;
                     }
                 }
             }
-            return true;
+        }
+        return true;
     }
 
     private Degree createDegree(AddStudentForm addStudentForm) {
@@ -64,6 +65,11 @@ public class StudentAddMutator {
         degree.setGpa(addStudentForm.getGpa());
         degree.setGraduationTerm(addStudentForm.getGraduationTerm());
         degree.setGraduationYear(addStudentForm.getGraduationYear());
+        List<String> transferSchools = addStudentForm.getTransferSchools();
+        if (transferSchools.size() > 0) {
+            IntStream.range(0, transferSchools.size())
+                    .forEach(s -> degreeDao.addStudentTransferCollege(addStudentForm.getId(), transferSchools.get(s)));
+        }
         degreeDao.addStudentDegree(degree);
         return degree;
     }
@@ -75,12 +81,12 @@ public class StudentAddMutator {
         employment.setPosition(addStudentForm.getPosition());
         employment.setSkills(addStudentForm.getSkills());
         employment.setSalary(Double.parseDouble(addStudentForm.getSalary().replaceAll(",", "")));
-        if (addStudentForm.getStartDate() !=null && !("").equals(addStudentForm.getStartDate())) {
+        if (addStudentForm.getStartDate() != null && !("").equals(addStudentForm.getStartDate())) {
             Date javaDate = new SimpleDateFormat("dd/MM/yyyy").parse(addStudentForm.getStartDate());
             java.sql.Date date = java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(javaDate));
             employment.setStartDate(date);
         }
-        if (addStudentForm.getEndDate() !=null && !("").equals(addStudentForm.getEndDate())) {
+        if (addStudentForm.getEndDate() != null && !("").equals(addStudentForm.getEndDate())) {
             Date javaDate2 = new SimpleDateFormat("dd/MM/yyyy").parse(addStudentForm.getEndDate());
             java.sql.Date date2 = java.sql.Date.valueOf(new SimpleDateFormat("yyyy-MM-dd").format(javaDate2));
             employment.setEndDate(date2);
@@ -89,11 +95,21 @@ public class StudentAddMutator {
         employment.setInternship(addStudentForm.getIsInternship());
         employment.setWillBeHired(addStudentForm.getWillBeHired());
         employmentDao.addEmployment(employment);
-        return  employment;
+        return employment;
     }
 
     private boolean checkStudentDupe(Student student) {
         List<Student> studentList = studentDaoImpl.getStudents();
         return studentList.stream().filter(s -> Objects.equals(s.getId(), student.getId())).findAny().isPresent();
+    }
+
+    public static Student createStudent(Student student, ArrayList<Degree> degree, ArrayList<Employment> employment) {
+        //ArrayList<String> transferColleges = new ArrayList<>();
+        //transferColleges.addAll(Arrays.asList(studentDaoImpl.getStudentTransferSchool(student.getId()));
+        student.setDegrees(degree);
+        student.setEmployments(employment);
+        student.setGpa(student.getDegrees().get(0).getGpa());
+        //student.setTransferColleges((ArrayList) studentDaoImpl.getStudentTransferSchool(student.getId()));
+        return student;
     }
 }

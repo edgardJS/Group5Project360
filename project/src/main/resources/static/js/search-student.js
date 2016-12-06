@@ -16,7 +16,7 @@ $(document).ready(function () {
                 type: "POST",
                 data: postData,
                 success: function (data, textStatus, jqXHR) {
-                    //$('#success_message').slideDown({opacity: "show"}, "slow");
+                    $('#success_message').slideDown({opacity: "show"}, "slow");
                     $("#searchStudentForm")[0].reset();
                     //$form.data('bootstrapValidator').resetForm();
                 },
@@ -33,5 +33,11 @@ $(function () {
     $("#header").load("header.html", function () {
         $('.active').removeClass('active');
         $('li[name=search-student]').addClass('active');
+    });
+});
+
+$("#employment-plus").click(function () {
+    $("#employment-container").slideToggle("slow", function () {
+        // Do stuff here if needed maybe validation and change plus to minus?
     });
 });

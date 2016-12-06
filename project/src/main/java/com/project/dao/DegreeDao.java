@@ -24,7 +24,7 @@ public class DegreeDao {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-    
+
     /**
      * Adds a degree that is associated to a student by studentId.
      *
@@ -32,27 +32,27 @@ public class DegreeDao {
      */
     public void addStudentDegree(Degree degree) {
         String sql = "insert into StudentDegree(studentId,  degree, `program`, "
-                    + "graduationTerm, graduationYear, gpa) "
-                    + "values (?, ?, ?, ?, ?, ?)";
+                + "graduationTerm, graduationYear, gpa) "
+                + "values (?, ?, ?, ?, ?, ?)";
         Object[] parameters = {degree.getStudentId(), degree.getDegreeLevel(),
-                                degree.getProgram(), degree.getGraduationTerm(),
-                                degree.getGraduationYear(), degree.getGpa()};
+                degree.getProgram(), degree.getGraduationTerm(),
+                degree.getGraduationYear(), degree.getGpa()};
         int[] types = {Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
-                        Types.VARCHAR, Types.INTEGER, Types.DOUBLE};
+                Types.VARCHAR, Types.INTEGER, Types.DOUBLE};
         jdbcTemplate.update(sql, parameters, types);
     }
-    
+
     /**
      * Gets the all the degrees of a student by id.
      *
      * @param id id of student
      * @return list of degrees
      */
-    public List<Degree> getStudentDegrees(int id) {
+    public ArrayList<Degree> getStudentDegrees(int id) {
         String sql = "select * from StudentDegree where studentId = " + id;
-        List<Degree> degrees = new ArrayList<>();
+        ArrayList<Degree> degrees = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row: rows) {
+        for (Map row : rows) {
             Degree degree = new Degree();
             degree.setStudentId((Integer) row.get("studentId"));
             degree.setDegreeId((Integer) row.get("degreeId"));
@@ -60,11 +60,12 @@ public class DegreeDao {
             degree.setGraduationYear((Integer) row.get("graduationYear"));
             degree.setGraduationTerm((String) row.get("graduationTerm"));
             degree.setProgram((String) row.get("program"));
-            degree.setDegreeLevel((String)row.get("degree"));
+            degree.setDegreeLevel((String) row.get("degree"));
+            degrees.add(degree);
         }
         return degrees;
     }
-    
+
     /**
      * Gets all degrees.
      * For use in combo box.
@@ -107,25 +108,25 @@ public class DegreeDao {
     private List<Degree> makeListDegree(String sql) {
         List<Degree> degrees = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
-        for (Map row: rows) {
+        for (Map row : rows) {
             Degree degree = new Degree();
             degree.setProgram((String) row.get("program"));
-            degree.setDegreeLevel((String)row.get("degree"));
+            degree.setDegreeLevel((String) row.get("degree"));
         }
         return degrees;
     }
-    
+
     /**
      * Gets a specific degree by id from a student.
      *
-     * @param degreeId degree id to get
+     * @param degreeId  degree id to get
      * @param studentId student to get from
      * @return degree from DB
      */
     public Degree getStudentDegree(int degreeId, int studentId) {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
-        Object[] parameters = new Object[] {degreeId, studentId};
-        return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
+        Object[] parameters = new Object[]{degreeId, studentId};
+        return (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
 
     }
 
@@ -142,6 +143,13 @@ public class DegreeDao {
     public List<String> getTransferColleges() {
         String query = "select * from TransferCollege";
         return (List<String>) jdbcTemplate.queryForList(query, String.class);
+    }
+
+    public void addStudentTransferCollege(Integer id, String transferSchools) {
+        String sql = "insert into StudentTransferCollege(studentId, collegeName)" +
+                "values('" + id + "', '" + transferSchools + "');";
+
+        jdbcTemplate.update(sql);
     }
 }
 

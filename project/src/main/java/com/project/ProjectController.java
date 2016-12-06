@@ -1,8 +1,11 @@
 package com.project;
 
 import com.project.Model.AddStudentForm;
+import com.project.Model.Degree;
+import com.project.Model.Employment;
 import com.project.Model.Student;
 import com.project.Mutator.StudentAddMutator;
+import com.project.Mutator.StudentEditMutator;
 import com.project.dao.DegreeDao;
 import com.project.dao.EmploymentDao;
 import com.project.dao.ReportDao;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -44,6 +48,9 @@ public class ProjectController {
 
     @Autowired
     StudentAddMutator studentAddMutator;
+
+    @Autowired
+    StudentEditMutator studentEditMutator;
 
     @GetMapping(value = "/main")
     public String main() {
@@ -71,17 +78,14 @@ public class ProjectController {
     @RequestMapping(value = "/addStudentForm", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
-            //studentAddMutator.submitAddStudent(addStudentForm);
             try {
                 if (studentAddMutator.submitAddStudent(addStudentForm)) {
-                    studentAddMutator.submitAddStudent(addStudentForm);
                     return ResponseEntity.ok("success");
                 }
                 else {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate");
                 }
             } catch (Exception e) {
-                //e.getCause().getMessage();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
             }
     }
@@ -91,7 +95,12 @@ public class ProjectController {
     public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
         Integer id = Integer.valueOf(studentId);
         Student student = studentDaoImpl.getStudent(id);
-        viewStudents(student);
+        ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
+        ArrayList<Employment> employment = employmentDao.getEmployments(id);
+        List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
+        Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
+        student.setTransferColleges(transferColleges);
+        viewStudents(completeStudent);
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("student", student);
         return new ModelAndView("view-edit-student", modelMap);
@@ -99,8 +108,6 @@ public class ProjectController {
 
     @GetMapping(value = "/searchStudent")
     public String updateStudent(@RequestParam(value = "student", required = false) Student student) {
-//        studentDao.getStudent();
-//        studentDao.testUpdateStudent();
         studentDaoImpl.getStudents();
         return "search-student";
     }
@@ -115,5 +122,16 @@ public class ProjectController {
         ModelMap modelMap = new ModelMap();
         modelMap.addAttribute("student", student);
         return new ModelAndView("view-edit-student", modelMap);
+    }
+
+    @RequestMapping(value = "/viewStudents", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> editStudentPost(AddStudentForm addStudentForm) throws Exception {
+        try {
+            studentEditMutator.editStudentSubmit(addStudentForm);
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
+        }
     }
 }

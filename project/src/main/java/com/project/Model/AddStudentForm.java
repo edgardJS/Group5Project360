@@ -16,11 +16,8 @@ import java.util.ArrayList;
  */
 @Data
 public class AddStudentForm {
-    @NotNull
     Integer id;
-    @NotBlank
     String firstName;
-    @NotBlank
     String lastName;
     @Email
     String uwEmail;

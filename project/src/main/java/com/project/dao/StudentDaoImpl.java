@@ -93,4 +93,9 @@ public class StudentDaoImpl implements StudentDao{
         }
         return students;
     }
+
+    public List<String> getStudentTransferSchool(int id) {
+        String sql = "select collegeName from StudentTransferCollege where StudentId = '" + 1111111 + "'";
+        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+    }
 }

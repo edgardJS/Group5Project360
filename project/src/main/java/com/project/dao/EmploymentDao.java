@@ -96,12 +96,12 @@ public class EmploymentDao {
     /**
      * Gets all employments from a student.
      *
-     * @param student student to get employments from
+     * @param id student to get employments from
      * @return list of employments
      */
-    public List<Employment> getEmployments(Student student) {
-        String sql = "select * from Employment where studentId = " + student.getId();
-        List<Employment> employments = new ArrayList<>();
+    public ArrayList<Employment> getEmployments(int id) {
+        String sql = "select * from Employment where studentId = " + id;
+        ArrayList<Employment> employments = new ArrayList<>();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
         for (Map row : rows) {
             Employment employment = new Employment();
