@@ -45,18 +45,12 @@
         </tr>
         </thead>
         <tbody>
+        {{#data}}
         <tr>
-            <td>Amazon</td>
-            <td>Java, mySQL, HTML</td>
+            <td>{{company}}</td>
+            <td>{{skills}}</td>
         </tr>
-        <tr>
-            <td>Apple</td>
-            <td>Swift, Objective C</td>
-        </tr>
-        <tr>
-            <td>Microsoft</td>
-            <td>C#, JavaScript</td>
-        </tr>
+        {{/data}}
         </tbody>
     </table>
 </div>

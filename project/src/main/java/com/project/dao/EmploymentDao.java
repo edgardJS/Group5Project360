@@ -117,10 +117,11 @@ public class EmploymentDao {
         return employments;
     }
 
-//    public List<Employment> getJobs(int id) {
-//        String sql = "select * from Employment where studentId = " + id;
-//        return (List<Employment>) jdbcTemplate.queryForList(sql, List.class);
-//    }
+    public List<Map<String, Object>> getSkillsUsed() {
+        String sql = "select company, skills from Employment group by company";
+
+        return jdbcTemplate.queryForList(sql);
+    }
 
 }
 

@@ -161,12 +161,6 @@ public class DegreeDao {
 
         return jdbcTemplate.queryForList(sql);
     }
-
-    public List<Map<String, Object>> getEmployedByYear() {
-        String sql = "select Year(startDate) as year, count(*) as count From Employment GROUP BY YEAR(startDate)";
-
-        return jdbcTemplate.queryForList(sql);
-    }
 }
 
 /**
