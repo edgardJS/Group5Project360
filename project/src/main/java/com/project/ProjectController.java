@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -126,8 +127,11 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/reportSkills")
-    public String reportSkills() {
-        return "report-skills";
+    public ModelAndView reportSkills() {
+        List<Map<String, Object>> data = employmentDao.getSkillsUsed();
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("data", data);
+        return new ModelAndView("report-skills", modelMap);
     }
 
     @GetMapping(value = "/reportInternshipEmployment")

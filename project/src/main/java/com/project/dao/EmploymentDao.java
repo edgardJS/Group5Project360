@@ -118,6 +118,12 @@ public class EmploymentDao {
         return employments;
     }
 
+    public List<Map<String, Object>> getSkillsUsed() {
+        String sql = "select company, skills from Employment group by company";
+
+        return jdbcTemplate.queryForList(sql);
+    }
+
 }
 
 /**
