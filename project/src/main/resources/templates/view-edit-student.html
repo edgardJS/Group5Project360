@@ -38,7 +38,7 @@
 
 <div class="container">
 
-    <form class="well form-horizontal col-md-12" action="/addStudentForm" method="post" id="addStudentForm">
+    <form class="well form-horizontal col-md-12" action="/editStudentForm" method="post" id="editStudentForm">
         <fieldset>
 
             <!-- Form Name -->
@@ -50,7 +50,8 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                            <label name="id" class="form-control" type="text">{{student.id}}</label>
+                            <input type="hidden" name="id" value="{{student.id}}" />
+                            <input type="text" name="id" value="{{student.id}}" disabled="disabled" />
                         </div>
                     </div>
                 </div>
@@ -61,7 +62,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <label name="firstName" class="form-control"
+                            <label name="firstName" value = "{{student.firstName}}"class="form-control"
                                    type="text">{{student.firstName}}</label>
                         </div>
                     </div>
@@ -112,7 +113,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                         <label name="studentDegree" class="form-control"
-                               type="text">{{studentId}}</label>
+                               type="text">{{degreeLevel}}</label>
                     </div>
                 </div>
             </div>
@@ -415,12 +416,12 @@
 
             <!-- Success message -->
             <div class="alert alert-success" role="alert" id="success_message">Success <i
-                    class="glyphicon glyphicon-thumbs-up"></i> Student Added
+                    class="glyphicon glyphicon-thumbs-up"></i> Student Updated
             </div>
 
             <!-- Fail message -->
             <div class="alert alert-danger col-md-12" role="alert" id="failed_message">Failed <i
-                    class="glyphicon glyphicon-thumbs-down"></i> Student NOT Added
+                    class="glyphicon glyphicon-thumbs-down"></i> Student NOT Updated
             </div>
 
             <!-- Button -->

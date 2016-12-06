@@ -25,6 +25,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.*;
+
 
 /**
  * @author Edgard Solorzano
@@ -74,8 +76,7 @@ public class ProjectController {
         return new ModelAndView("add-student", modelMap);
     }
 
-    //@PostMapping(value = "/addStudentForm")
-    @RequestMapping(value = "/addStudentForm", method = RequestMethod.POST)
+    @RequestMapping(value = "/addStudentForm", method = POST)
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
             try {
@@ -94,16 +95,22 @@ public class ProjectController {
     @ResponseBody
     public ModelAndView searchStudent(@RequestParam(value = "studentId") String studentId) throws Exception {
         Integer id = Integer.valueOf(studentId);
-        Student student = studentDaoImpl.getStudent(id);
-        ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
-        ArrayList<Employment> employment = employmentDao.getEmployments(id);
-        List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
-        Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
-        student.setTransferColleges(transferColleges);
-        viewStudents(completeStudent);
-        ModelMap modelMap = new ModelMap();
-        modelMap.addAttribute("student", student);
-        return new ModelAndView("view-edit-student", modelMap);
+        try {
+            Student student = studentDaoImpl.getStudent(id);
+            ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
+            ArrayList<Employment> employment = employmentDao.getEmployments(id);
+            List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
+            Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
+            student.setTransferColleges(transferColleges);
+            viewStudents(completeStudent);
+            ModelMap modelMap = new ModelMap();
+            modelMap.addAttribute("student", student);
+            return new ModelAndView("view-edit-student", modelMap);
+        } catch (Exception e) {
+            ModelMap failModel = new ModelMap();
+            failModel.addAttribute("studentDupe", String.class);
+            return new ModelAndView("search-student", failModel);
+        }
     }
 
     @GetMapping(value = "/searchStudent")
@@ -124,9 +131,9 @@ public class ProjectController {
         return new ModelAndView("view-edit-student", modelMap);
     }
 
-    @RequestMapping(value = "/viewStudents", method = RequestMethod.POST)
+    @RequestMapping(value = "/editStudentForm", method = POST)
     @ResponseBody
-    public ResponseEntity<String> editStudentPost(AddStudentForm addStudentForm) throws Exception {
+    public ResponseEntity<String> editStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
         try {
             studentEditMutator.editStudentSubmit(addStudentForm);
             return ResponseEntity.ok("success");

@@ -41,6 +41,13 @@
             </form>
         </div>
     </div>
+
+    {{#studentDupe}}
+    <!-- Fail message -->
+    <div class="alert alert-danger col-md-12" role="alert" id="failed-dupe">Failed <i
+            class="glyphicon glyphicon-thumbs-down"></i> Student does not exist
+    </div>
+    {{/studentDupe}}
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

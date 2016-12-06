@@ -2,29 +2,39 @@
 // it does not refresh and sending back from
 // back end a 400 if there is errors, else
 // sending back a 200 and success is hit.
-$(document).ready(function () {
-
-    $form = $("#searchStudentForm");
+$form = $("#editStudentForm");
 //callback handler for form submit
-    $form.submit(function (e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action");
-        e.stopImmediatePropagation();
-        $.ajax(
-            {
-                url: formURL,
-                type: "POST",
-                data: postData,
-                success: function (data, textStatus, jqXHR) {
-                    $('#success_message').slideDown({opacity: "show"}, "slow");
-                    $("#searchStudentForm")[0].reset();
-                    //$form.data('bootstrapValidator').resetForm();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                }
-            });
-    });
+$form.submit(function (e) {
+    var postData = $(this).serializeArray();
+    var formURL = $(this).attr("action");
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    $.ajax(
+        {
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function (response) {
+                $('#success_message').slideUp({opacity: "show"}, "slow");
+                $('#failed_message').slideUp({opacity: "hide"}, "slow");
+                $("#editStudentForm")[0].reset();
+                //$form.data('bootstrapValidator').resetForm();
+                return false;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        })
+        .fail(function (e) {
+            $('#failed_message').slideDown({opacity: "show"}, "slow");
+            $("#editStudentForm")[0].reset();
+            return false;
+        });
+    //response.preventDefault();
+    e.stopImmediatePropagation();
+    return false;
 });
+
 /*
  Load the header and add class of current page
  to active.

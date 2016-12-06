@@ -30,13 +30,12 @@ public class StudentEditMutator {
         student.setLastName(addStudentForm.getLastName());
         student.setFirstName(addStudentForm.getFirstName());
         student.setUwEmail(addStudentForm.getUwEmail());
+        student.setEmail(addStudentForm.getEmail());
         student.setTransferColleges(addStudentForm.getTransferSchools());
-        if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
-            student.setEmail(addStudentForm.getEmail());
-        }
-        if (addStudentForm.getProgram() != null && !addStudentForm.getProgram().isEmpty()) {
-                studentDaoImpl.updateStudent(student);
-        }
+//        if (addStudentForm.getEmail() != null || !addStudentForm.getEmail().isEmpty()) {
+//            student.setEmail(addStudentForm.getEmail());
+//        }
+        studentDaoImpl.updateStudent(student);
         return true;
     }
 }
