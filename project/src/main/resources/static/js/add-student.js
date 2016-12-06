@@ -63,7 +63,7 @@ $(document).ready(function () {
                         min: 3
                     },
                     between: {
-                        min: 0.0,
+                      min: 0.0,
                         max: 4.0,
                         message: 'GPA must be between 0.0 and 4.0'
                     },
@@ -91,10 +91,10 @@ $(document).ready(function () {
             }
         }
     });
-    // .on('success.form.bv', function (e) {
-    //     $('#success_message').slideDown({opacity: "show"}, "slow");// Do something ...
-    //     $('#addStudentForm').data('bootstrapValidator').resetForm();
-    // });
+        // .on('success.form.bv', function (e) {
+        //     $('#success_message').slideDown({opacity: "show"}, "slow");// Do something ...
+        //     $('#addStudentForm').data('bootstrapValidator').resetForm();
+        // });
 });
 
 /*
@@ -114,14 +114,8 @@ $('#addStudentForm .input-group.date').datepicker({
 
 });
 
-$("#employment-plus").click(function () {
-    $("#employment-container").slideToggle("slow", function () {
-        // Do stuff here if needed maybe validation and change plus to minus?
-    });
-});
-
-$("#degree-plus").click(function () {
-    $("#degree-container").slideToggle("slow", function () {
+$("#employment-plus").click(function() {
+    $( "#employment-container" ).slideToggle( "slow", function() {
         // Do stuff here if needed maybe validation and change plus to minus?
     });
 });
@@ -132,19 +126,17 @@ $("#degree-plus").click(function () {
 // sending back a 200 and success is hit.
 $form = $("#addStudentForm");
 //callback handler for form submit
-$form.submit(function (e) {
+$form.unbind('submit').submit(function (e) {
+    e.preventDefault();
     var postData = $(this).serializeArray();
     var formURL = $(this).attr("action");
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    $.ajax(
+    var response = $.ajax(
         {
             url: formURL,
             type: "POST",
             data: postData,
             success: function (response) {
                 $('#success_message').slideDown({opacity: "show"}, "slow");
-                $('#failed_message').slideUp({opacity: "hide"}, "slow");
                 $("#addStudentForm")[0].reset();
                 $form.data('bootstrapValidator').resetForm();
                 return false;
@@ -153,9 +145,8 @@ $form.submit(function (e) {
                 console.log(errorThrown);
             }
         })
-        .fail(function (e) {
+        .fail(function(e) {
             $('#failed_message').slideDown({opacity: "show"}, "slow");
-            $("#addStudentForm")[0].reset();
             return false;
         });
     //response.preventDefault();

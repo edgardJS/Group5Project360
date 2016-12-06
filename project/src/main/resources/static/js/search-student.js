@@ -1,3 +1,28 @@
+$(document).ready(function () {
+    $('#searchStudentForm').bootstrapValidator({
+        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            studentId: {
+                validators: {
+                    stringLength: {
+                        min: 7,
+                        max:7,
+                        message: "Please enter a 7 digit Student ID"
+                    },
+                    notEmpty: {
+                        message: "Please enter a Student ID to search for"
+                    }
+                }
+            }
+        }
+    });
+});
+
 // submitting form using ajax but out here now
 // it does not refresh and sending back from
 // back end a 400 if there is errors, else
@@ -15,7 +40,7 @@ $form.submit(function (e) {
             type: "POST",
             data: postData,
             success: function (response) {
-                $('#success_message').slideUp({opacity: "show"}, "slow");
+                $('#success_message').slideDown({opacity: "show"}, "slow");
                 $('#failed_message').slideUp({opacity: "hide"}, "slow");
                 $("#editStudentForm")[0].reset();
                 //$form.data('bootstrapValidator').resetForm();
