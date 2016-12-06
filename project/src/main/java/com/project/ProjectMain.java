@@ -10,12 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-//@ContextConfiguration(classes = AppConfig.class)
 public class ProjectMain {
 
     public static void main(String[] args) {
-//		SpringApplication app = new SpringApplication(ProjectMain.class);
-//		app.run(args);
         SpringApplication.run(ProjectMain.class, args);
     }
 

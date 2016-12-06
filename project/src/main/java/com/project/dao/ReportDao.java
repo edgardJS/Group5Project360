@@ -7,11 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class holds methods that are for running reports.
  *
  * @author Brian Jorgenson
+ * @author Edgard Solorzano
+ * @author Adam Waldron
  */
 @Repository
 public class ReportDao {
@@ -25,9 +28,10 @@ public class ReportDao {
      *
      * @return list of skills
      */
-    public List<String> getSkills() {
-        String sql = "select skills from Employment";
-        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+    public List<Map<String, Object>> getSkillsUsed() {
+        String sql = "select company, skills from Employment group by company";
+
+        return jdbcTemplate.queryForList(sql);
     }
     
     /**
@@ -45,6 +49,21 @@ public class ReportDao {
             students.add((Student) jdbcTemplate.queryForObject(sql, new StudentRowMapper()));
         }
         return students;
+    }
+
+    /**
+     * Gets students graduated by year and employed
+     * at all years that have both.
+     * @return
+     */
+    public List<Map<String, Object>> getStudentsGraduatedandEmployedByYear() {
+        String sql = "Select yearG, graduated, employed from (SELECT graduationYear as yearG, count(*) as graduated " +
+                "FROM StudentDegree GROUP BY graduationYear) as x, " +
+                "(select Year(startDate) as yearE, count(*) as employed " +
+                "FROM Employment GROUP BY YEAR(startDate)) as y " +
+                "where x.yearG = y.yearE";
+
+        return jdbcTemplate.queryForList(sql);
     }
     
     /**
