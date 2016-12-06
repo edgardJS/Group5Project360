@@ -1,5 +1,7 @@
 package com.project.dao;
 
+import com.project.Model.Degree;
+import com.project.Model.Employment;
 import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,6 +22,15 @@ import java.util.Map;
  */
 @Repository
 public class StudentDao {
+    
+    @Autowired
+    DegreeDao degreeDao;
+    
+    @Autowired
+    EmploymentDao employmentDao;
+    
+    @Autowired
+    TransferCollegeDao transferCollegeDao;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -47,7 +58,7 @@ public class StudentDao {
         String sql = "update Student set uwEmail = ?, externalEmail = ?"
                     + "where studentId = ?";
         Object[] parameters = {student.getUwEmail(), student.getEmail(), student.getId()};
-        int[] types = {Types.VARCHAR, Types.VARCHAR};
+        int[] types = {Types.VARCHAR, Types.VARCHAR, Types.INTEGER};
         jdbcTemplate.update(sql, parameters, types);
     }
     
@@ -59,7 +70,21 @@ public class StudentDao {
      */
     public Student getStudent(int id) {
         String sql = "select * from Student where studentId = ?";
-        return (Student) jdbcTemplate.queryForObject(sql, new Object[]{id}, new StudentRowMapper());
+        Student s = (Student) jdbcTemplate.queryForObject(sql, new Object[]{id}, new StudentRowMapper());
+        getDataOutsideOfTable(s);
+        return s;
+    }
+    
+    /**
+     * Sets data to student not from Student table.
+     *
+     * @param student student to get data for
+     */
+    private void getDataOutsideOfTable(Student student) {
+        student.setDegrees((ArrayList<Degree>)degreeDao.getStudentDegrees(student.getId()));
+        student.setEmployments((ArrayList<Employment>) employmentDao.getEmployments(student));
+        List<String> colleges = transferCollegeDao.getTransferCollegeById(student.getId());
+        student.setTransferColleges((ArrayList<String>) colleges);
     }
     
     /**
@@ -78,6 +103,7 @@ public class StudentDao {
             student.setLastName((String) row.get("lastName"));
             student.setUwEmail((String) row.get("uwEmail"));
             student.setEmail((String) row.get("externalEmail"));
+            getDataOutsideOfTable(student);
             students.add(student);
         }
         return students;

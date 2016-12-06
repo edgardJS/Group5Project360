@@ -1,7 +1,6 @@
 package com.project.dao;
 
 import com.project.Model.Degree;
-import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -61,6 +60,7 @@ public class DegreeDao {
             degree.setGraduationTerm((String) row.get("graduationTerm"));
             degree.setProgram((String) row.get("program"));
             degree.setDegreeLevel((String)row.get("degree"));
+            degrees.add(degree);
         }
         return degrees;
     }
@@ -111,6 +111,7 @@ public class DegreeDao {
             Degree degree = new Degree();
             degree.setProgram((String) row.get("program"));
             degree.setDegreeLevel((String)row.get("degree"));
+            degrees.add(degree);
         }
         return degrees;
     }
@@ -126,7 +127,6 @@ public class DegreeDao {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
         Object[] parameters = new Object[] {degreeId, studentId};
         return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
-
     }
 
     public List<String> getTransferColleges() {
@@ -143,6 +143,8 @@ class DegreeRowMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int row) throws SQLException {
         Degree degree = new Degree();
+        degree.setDegreeId(rs.getInt("degreeId"));
+        degree.setStudentId(rs.getInt("studentId"));
         degree.setDegreeLevel(rs.getString("degree"));
         degree.setProgram(rs.getString("program"));
         degree.setGraduationTerm(rs.getString("graduationTerm"));

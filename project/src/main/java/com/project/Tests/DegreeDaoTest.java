@@ -11,16 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 
 /**
- * Created by Brian on 12/1/2016.
+ * @author Brian Jorgenson
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DegreeDaoTest {
-
-//    @Autowired
-//    private DegreeDao Dao;
 
     @Autowired
     DegreeDao degreeDao;
@@ -33,6 +32,7 @@ public class DegreeDaoTest {
     @Before
     public void setUp() throws Exception {
         degree = new Degree();
+        degree.setDegreeId(5);
         degree.setStudentId(12345);
         degree.setDegreeLevel("degree");
         degree.setProgram("program");
@@ -44,7 +44,6 @@ public class DegreeDaoTest {
     @Test
     public void addStudentDegree() throws Exception {
         try {
-            jdbcTemplate = new JdbcTemplate();
             degreeDao.addStudentDegree(degree);
         } catch (Exception e) {
             Assert.fail("Failure to add to StudentDegree table with exception " + e);
@@ -53,8 +52,8 @@ public class DegreeDaoTest {
     
     @Test
     public void getStudentDegrees() throws Exception {
-        Assert.assertNotNull("StudentDegrees returned null",
-                        degreeDao.getStudentDegrees(12345));
+        List<Degree> d = degreeDao.getStudentDegrees(2);
+        Assert.assertNotNull("StudentDegrees returned null", d);
     }
     
     @Test
@@ -65,7 +64,19 @@ public class DegreeDaoTest {
     
     @Test
     public void getStudentDegree() throws Exception {
-        Assert.assertSame(degree, degreeDao.getStudentDegree(degree.getDegreeId(), 12345));
+        Degree d = degreeDao.getStudentDegree(degree.getDegreeId(), 12345);
+        Assert.assertSame("Degree ids not same",
+                                    degree.getDegreeId(), d.getDegreeId());
+        Assert.assertTrue("Degree student ids not same",
+                                    degree.getStudentId() == d.getStudentId());
+        Assert.assertTrue("Degree levels not same",
+                                    degree.getDegreeLevel().equals(d.getDegreeLevel()));
+        Assert.assertEquals(degree.getGpa(), d.getGpa(), .01);
+        Assert.assertTrue("Degree graduation terms not same",
+                                    degree.getGraduationTerm().equals(d.getGraduationTerm()));
+        Assert.assertEquals("Degree graduation years not same",
+                                    degree.getGraduationYear(), d.getGraduationYear());
+        Assert.assertTrue("Degree programs not same",
+                                    degree.getProgram().equals(d.getProgram()));
     }
-    
 }
