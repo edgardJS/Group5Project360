@@ -153,13 +153,18 @@ public class DegreeDao {
     }
 
     public List<Map<String, Object>> getStudentsGraduatedByYear() {
-        String sql = "SELECT graduationYear, count(*) as NUM FROM StudentDegree GROUP BY graduationYear";
+//        String sql = "SELECT graduationYear as year, count(*) as count FROM StudentDegree GROUP BY graduationYear";
+        String sql = "Select yearG, graduated, employed from (SELECT graduationYear as yearG, count(*) as graduated " +
+                "FROM StudentDegree GROUP BY graduationYear) as x, " +
+                "(select Year(startDate) as yearE, count(*) as employed " +
+                "FROM Employment GROUP BY YEAR(startDate)) as y " +
+                "where x.yearG = y.yearE";
 
         return jdbcTemplate.queryForList(sql);
     }
 
     public List<Map<String, Object>> getEmployedByYear() {
-        String sql = "select Year(startDate), count(*) as NUM2 From Employment GROUP BY YEAR(startDate)";
+        String sql = "select Year(startDate) as year, count(*) as count From Employment GROUP BY YEAR(startDate)";
 
         return jdbcTemplate.queryForList(sql);
     }
