@@ -14,15 +14,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 
 /**
@@ -117,8 +120,10 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/createReport")
-    public String createReport() {
-        return "create-report";
+    public ModelAndView createReport() {
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("report", 10);
+        return new ModelAndView("create-report", modelMap);
     }
 
     @GetMapping(value = "/viewStudents")

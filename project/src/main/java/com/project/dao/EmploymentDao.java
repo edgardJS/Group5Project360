@@ -106,10 +106,13 @@ public class EmploymentDao {
         for (Map row : rows) {
             Employment employment = new Employment();
             employment.setCompanyName((String) row.get("company"));
-            employment.setEmploymentId((Integer) row.get("employmentId"));
+            employment.setStudentId(id);
             employment.setPosition((String) row.get("position"));
-            employment.setSkills(
-                    new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
+            employment.setStartDate((Date) row.get("startDate"));
+            employment.setEndDate((Date) row.get("endDate"));
+            BigDecimal salary = (BigDecimal) row.get("salary");
+            employment.setSalary(salary.doubleValue());
+            employment.setSkills(new ArrayList<String>(Arrays.asList(((String) row.get("skills")).split(", "))));
             employments.add(employment);
         }
         return employments;
