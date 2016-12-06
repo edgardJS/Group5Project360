@@ -24,6 +24,7 @@ import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -120,8 +121,11 @@ public class ProjectController {
     }
 
     @GetMapping(value = "/reportGraduatedYear")
-    public String reportGraduatedYear() {
-        return "report-graduated-year";
+    public ModelAndView reportGraduatedYear() {
+        List<Map<String, Object>> data = degreeDao.getStudentsGraduatedByYear();
+        ModelMap modelMap = new ModelMap();
+        modelMap.addAttribute("data", data);
+        return new ModelAndView("report-graduated-year", modelMap);
     }
 
     @GetMapping(value = "/reportSkills")
