@@ -98,7 +98,7 @@ public class ProjectController {
         try {
             Student student = studentDaoImpl.getStudent(id);
             ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
-            ArrayList<Employment> employment = employmentDao.getEmployments(id);
+            List<Employment> employment = employmentDao.getEmployments(id);
             List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
             Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
             student.setTransferColleges(transferColleges);
