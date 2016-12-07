@@ -95,3 +95,9 @@ $('#addEmploymentForm .input-group.date').datepicker({
     clearBtn: true
 
 });
+
+/* Datepicker config */
+$('#editStudentForm .input-group.date').datepicker({
+    clearBtn: true
+
+});

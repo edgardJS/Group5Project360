@@ -51,7 +51,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                            <input type="text" name="id" value="{{student.id}}" disabled="disabled" class="form-control"/>
+                            <input type="text" value="{{student.id}}" disabled="disabled" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input name="uwEmail" placeholder="{{student.uwEmail}}" class="form-control" type="text">
+                            <input name="uwEmail" value="{{student.uwEmail}}" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                            <input name="email" placeholder="{{student.email}}" class="form-control" type="text">
+                            <input name="email" value="{{student.email}}" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="companyName" placeholder="{{companyName}}" class="form-control" type="text">
+                            <input name="companyName" value="{{companyName}}" class="form-control" type="text" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="position" placeholder="{{position}}" class="form-control" type="text">
+                            <input name="position" value="{{position}}" class="form-control" type="text">
                         </div>
                     </div>
                 </div>
@@ -210,21 +210,12 @@
                 <div class="form-group col-md-6">
                     <label class="col-md-6 control-label">Skills</label>
                     <div class="col-md-6 inputGroupContainer">
+                        {{#skills}}
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="skills" placeholder="Skills" class="form-control" type="text">
+                            <input name="skills" value="{{.}}" class="form-control" type="text">
                         </div>
-                    </div>
-                </div>
-
-                <!-- Text input-->
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Skills</label>
-                    <div class="col-md-6 inputGroupContainer">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="skills" placeholder="Enter skills" class="form-control" type="text">
-                        </div>
+                        {{/skills}}
                     </div>
                 </div>
 
@@ -234,9 +225,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <!--<input name="startDate" placeholder="Enter start date" type="text" class="form-control">-->
-                            <input type="hidden" name="startDate" value="{{startDate}}"/>
-                            <input type="text" name="startDate" value="{{startDate}}" disabled="disabled"/>
+                            <input type="text" name="startDate" value="{{startDate}}" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -248,7 +237,7 @@
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <input type="hidden" name="endDate" value="{{endDate}}"/>
-                            <input type="text" name="endDate" value="{{endDate}}" disabled="disabled"/>
+                            <input type="text" name="endDate" value="{{endDate}}" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -259,9 +248,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <!--<input name="salary" placeholder="1,000,000" class="form-control" type="text">-->
-                            <input type="hidden" name="salary" value="{{salary}}"/>
-                            <input type="text" name="salary" value="{{salary}}" disabled="disabled"/>
+                            <input type="text" name="salary" value="{{salary}}" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -354,8 +341,7 @@
                 <div class="col-md-6 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
-                        <input type="hidden" name="id" value="{{student.id}}"/>
-                        <input type="text" name="id" value="{{student.id}}" disabled="disabled" class="form-control"/>
+                        <input type="text" value="{{student.id}}" disabled="disabled" class="form-control"/>
                     </div>
                 </div>
             </div>
