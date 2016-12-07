@@ -11,10 +11,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class holds database queries and actions for the employment class/table.
@@ -109,7 +106,7 @@ public class EmploymentDao {
         for (Map row : rows) {
             Employment employment = new Employment();
             employment.setCompanyName((String) row.get("company"));
-            employment.setStudentId(id);
+            employment.setEmploymentId((Integer) row.get("employmentId"));
             employment.setPosition((String) row.get("position"));
             employment.setStartDate((Date) row.get("startDate"));
             employment.setEndDate((Date) row.get("endDate"));
