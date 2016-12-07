@@ -19,9 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
@@ -79,8 +77,8 @@ public class ProjectController {
     public ModelAndView addStudent() {
         ModelMap modelMap = new ModelMap();
         List<String> transferColleges = degreeDao.getTransferColleges();
-        List<String> degreePrograms = degreeDao.getDegreePrograms();
-        List<String> degreeLevels = degreeDao.getDegreeLevels();
+        Set<String> degreePrograms = degreeDao.getDegreePrograms();
+        Set<String> degreeLevels = degreeDao.getDegreeLevels();
         modelMap.addAttribute("transferColleges", transferColleges);
         modelMap.addAttribute("program", degreePrograms);
         modelMap.addAttribute("degreeLevel", degreeLevels);
@@ -97,7 +95,7 @@ public class ProjectController {
     @ResponseBody
     public ResponseEntity<String> addStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
             try {
-                if (studentAddMutator.submitAddStudent(addStudentForm)) {
+                if (addStudentForm.getId() != null && studentAddMutator.submitAddStudent(addStudentForm)) {
                     return ResponseEntity.ok("success");
                 }
                 else {

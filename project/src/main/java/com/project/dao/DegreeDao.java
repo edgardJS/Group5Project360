@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This class holds database queries and actions for the degree class/table.
@@ -136,9 +135,10 @@ public class DegreeDao {
      *
      * @return list of degrees
      */
-    public List<String> getDegreePrograms() {
+    public Set<String> getDegreePrograms() {
         String sql = "select program from Degree";
-        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+        List<String> list = (List<String>) jdbcTemplate.queryForList(sql, String.class);
+        return list.stream().collect(Collectors.toSet());
     }
 
     /**
@@ -146,13 +146,15 @@ public class DegreeDao {
      *
      * @return list of degrees
      */
-    public List<String> getDegreeLevels() {
+    public Set<String> getDegreeLevels() {
         String sql = "select degree from Degree";
-        return (List<String>) jdbcTemplate.queryForList(sql, String.class);
+        List<String> list = (List<String>) jdbcTemplate.queryForList(sql, String.class);
+        return list.stream().collect(Collectors.toSet());
     }
 
     /**
      * Gets a list of transferColleges
+     *
      * @return list of transfer colleges
      */
     public List<String> getTransferColleges() {
@@ -162,6 +164,7 @@ public class DegreeDao {
 
     /**
      * Adds a transfer college to the DB
+     *
      * @param id
      * @param transferSchools
      */
