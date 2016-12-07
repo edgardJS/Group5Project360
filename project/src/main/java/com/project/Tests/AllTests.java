@@ -1,4 +1,4 @@
-package daoTests;
+package com.project.Tests;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,5 +9,6 @@ import org.junit.runners.Suite;
  * @author Brian Jorgenson
  */
 @RunWith(Suite.class)
+@Suite.SuiteClasses({DegreeDaoTest.class, EmploymentDaoTest.class, ReportDaoTest.class, StudentDaoImplTest.class})
 public class AllTests {
 }
