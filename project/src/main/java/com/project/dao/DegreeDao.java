@@ -1,6 +1,7 @@
 package com.project.dao;
 
 import com.project.Model.Degree;
+import com.project.Model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -129,7 +130,6 @@ public class DegreeDao {
         String sql = "select * from StudentDegree where degreeId = ? and studentId = ?";
         Object[] parameters = new Object[] {degreeId, studentId};
         return  (Degree) jdbcTemplate.queryForObject(sql, parameters, new DegreeRowMapper());
-
     }
 
     /**
