@@ -25,11 +25,11 @@ public class ReportDaoTest {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
-    @Test
-    public void getSkills() throws Exception {
-        List<String> skills = Dao.getSkills();
-        Assert.assertTrue("Unable to get skills", !skills.isEmpty());
-    }
+//    @Test
+//    public void getSkills() throws Exception {
+//        List<String> skills = Dao.getSkills();
+//        Assert.assertTrue("Unable to get skills", !skills.isEmpty());
+//    }
     
     @Test
     public void getGraduatesByYear() throws Exception {

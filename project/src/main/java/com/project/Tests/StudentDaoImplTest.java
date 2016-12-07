@@ -3,7 +3,7 @@ package com.project.Tests;
 import com.project.Model.Degree;
 import com.project.Model.Employment;
 import com.project.Model.Student;
-import com.project.dao.StudentDao;
+import com.project.dao.StudentDaoImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import java.util.List;
 public class StudentDaoImplTest {
     
     @Autowired
-    StudentDao Dao;
+    StudentDaoImpl Dao;
     
     @Autowired
     JdbcTemplate jdbcTemplate;
