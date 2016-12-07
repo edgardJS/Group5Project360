@@ -55,7 +55,7 @@ public class StudentDaoImpl implements StudentDao{
      * @param student student to update
      */
     public void updateStudent(Student student) {
-        String sql = "update Student set uwEmail = ?, externalEmail = ?"
+        String sql = "update Student set uwEmail = ?, externalEmail = ? "
                     + "where studentId = ?";
         Object[] parameters = {student.getUwEmail(), student.getEmail(), student.getId()};
         int[] types = {Types.VARCHAR, Types.VARCHAR, Types.INTEGER};
