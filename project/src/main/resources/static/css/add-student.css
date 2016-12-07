@@ -17,3 +17,8 @@ body { padding-top: 70px; }
     padding-bottom: 10px;
     font-size: 20px;
 }
+
+#employment-plus:hover {
+    opacity: 0.3;
+    cursor: pointer;
+}

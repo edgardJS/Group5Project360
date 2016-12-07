@@ -53,13 +53,14 @@ public class ProjectController {
     StudentEditMutator studentEditMutator;
 
     /**
-     * The GET for the main page.
+     * The GET for main page
      * @return the main.html
      */
-    @GetMapping(value = "/main")
+    @GetMapping(value = {"", "/","/main"})
     public String main() {
         return "main";
     }
+
 
     /**
      * The GET for the header.

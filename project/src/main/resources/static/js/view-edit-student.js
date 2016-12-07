@@ -89,3 +89,9 @@ $("#employment-plus").click(function () {
         // Do stuff here if needed maybe validation and change plus to minus?
     });
 });
+
+/* Datepicker config */
+$('#addEmploymentForm .input-group.date').datepicker({
+    clearBtn: true
+
+});
