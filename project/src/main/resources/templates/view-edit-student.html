@@ -202,7 +202,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="position" value="{{position}}" class="form-control" type="text">
+                            <input name="position" value="{{position}}" class="form-control" type="text" disabled="disabled">
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                         {{#skills}}
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input name="skills" value="{{.}}" class="form-control" type="text">
+                            <input name="skills" value="{{.}}" class="form-control" type="text" disabled="disabled">
                         </div>
                         {{/skills}}
                     </div>
@@ -226,7 +226,7 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                            <input type="text" name="startDate" value="{{startDate}}" class="form-control"/>
+                            <input type="text" name="startDate" value="{{startDate}}" class="form-control" disabled="disabled"/>
                         </div>
                     </div>
                 </div>
@@ -238,7 +238,7 @@
                         <div class="input-group date">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             <input type="hidden" name="endDate" value="{{endDate}}"/>
-                            <input type="text" name="endDate" value="{{endDate}}" class="form-control"/>
+                            <input type="text" name="endDate" value="{{endDate}}" class="form-control" disabled="disabled"/>
                         </div>
                     </div>
                 </div>
@@ -249,62 +249,11 @@
                     <div class="col-md-6 inputGroupContainer">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                            <input type="text" name="salary" value="{{salary}}" class="form-control"/>
+                            <input type="text" name="salary" value="{{salary}}" class="form-control" disabled="disabled"/>
                         </div>
                     </div>
                 </div>
 
-                <!-- radio checks -->
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Current Job?</label>
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="isCurrentJob" value="yes"/> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="isCurrentJob" value="no"/> No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- radio checks -->
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Will be Hired?</label>
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="willBeHired" value="yes"/> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="willBeHired" value="no"/> No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- radio checks -->
-                <div class="form-group col-md-6">
-                    <label class="col-md-6 control-label">Is an Internship?</label>
-                    <div class="col-md-6">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="isInternShip" value="yes"/> Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="isInternship" value="no"/> No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
             {{/employments}}
             {{/student}}
             <!-------------------- end of student current employment--------------------------------------->
