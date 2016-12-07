@@ -99,7 +99,7 @@ public class ProjectController {
                     return ResponseEntity.ok("success");
                 }
                 else {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("duplicate");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("error");
                 }
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
@@ -206,6 +206,17 @@ public class ProjectController {
     public ResponseEntity<String> editStudentPost(@Valid AddStudentForm addStudentForm) throws Exception {
         try {
             studentEditMutator.editStudentSubmit(addStudentForm);
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/addEmployment", method = POST)
+    @ResponseBody
+    public ResponseEntity<String> addEmploymentPost(AddStudentForm addStudentForm) throws Exception {
+        try {
+            employmentDao.addEmployment(studentAddMutator.createEmployment(addStudentForm));
             return ResponseEntity.ok("success");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getCause().getMessage());
