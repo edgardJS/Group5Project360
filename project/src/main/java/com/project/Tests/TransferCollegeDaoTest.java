@@ -27,13 +27,14 @@ public class TransferCollegeDaoTest {
     @Test
     public void getTransferCollegesById() throws Exception {
         List<String> colleges = Dao.getTransferCollegeById(2);
-        Assert.assertTrue("", colleges.get(0).equals("UWT"));
+        Assert.assertTrue("Able to get correct student college",
+                            colleges.get(0).equals("UWT"));
     }
     
     @Test
     public void getTransferColleges() throws Exception {
         List<String> colleges = Dao.getTransferColleges();
-        Assert.assertTrue(colleges.size() > 0);
+        Assert.assertTrue("Able to get colleges", !colleges.isEmpty());
     }
     
 }

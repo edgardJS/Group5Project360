@@ -1,4 +1,4 @@
-package daoTests;
+package com.project.Tests;
 
 import com.project.Model.Employment;
 import com.project.Model.Student;
@@ -83,7 +83,7 @@ public class EmploymentDaoTest {
     public void getEmployments() throws Exception {
         Student s = new Student();
         s.setId(2);
-        List<Employment> employments = Dao.getEmployments(s);
+        List<Employment> employments = Dao.getEmployments(s.getId());
         Assert.assertTrue("Unable to get employments", employments.size() > 0);
     }
     

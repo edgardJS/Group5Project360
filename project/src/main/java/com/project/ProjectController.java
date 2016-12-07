@@ -14,18 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.web.bind.annotation.RequestMethod.*;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 /**
@@ -97,7 +94,7 @@ public class ProjectController {
         Integer id = Integer.valueOf(studentId);
         try {
             Student student = studentDaoImpl.getStudent(id);
-            ArrayList<Degree> degree = degreeDao.getStudentDegrees(id);
+            ArrayList<Degree> degree = (ArrayList<Degree>) degreeDao.getStudentDegrees(id);
             ArrayList<Employment> employment = employmentDao.getEmployments(id);
             List<String> transferColleges = studentDaoImpl.getStudentTransferSchool(id);
             Student completeStudent = StudentAddMutator.createStudent(student, degree, employment);
